@@ -1,0 +1,28 @@
+name: Regénérer le tableau de bord
+
+# Déclenchement manuel uniquement (onglet Actions ou API).
+# Regénère dashboard/index.html et dashboard/artifact.html depuis les scripts,
+# puis committe le résultat s'il a changé.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install openpyxl
+      - run: python scripts/build_dashboard.py
+      - name: Committer la page regénérée
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dashboard/index.html dashboard/artifact.html
+          git diff --cached --quiet || git commit -m "Regénère le tableau de bord"
+          git push
