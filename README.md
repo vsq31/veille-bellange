@@ -24,7 +24,7 @@ veille-bellange/
 │   ├── registre.csv              # le registre (une ligne par lot / annonce / publication)
 │   ├── sources.csv               # les sources et leur état d'accès
 │   ├── journal.csv               # un enregistrement par passage
-│   └── registre.xlsx             # même contenu, 4 onglets, mis en forme
+│   └── registre.xlsx             # même contenu, 4 onglets, mis en forme (généré, non versionné)
 ├── dashboard/
 │   ├── index.html                # page autonome (GitHub Pages), générée depuis les données
 │   ├── template.html             # gabarit avec placeholders __DATA__ / __JOURNAL__ / __ALERTES__
@@ -50,7 +50,8 @@ Chaque lundi à 7h, une tâche planifiée Claude exécute la skill `veille-bella
 5. réécrit le registre et le journal ;
 6. met à jour la page ;
 7. dépose le brief en brouillon Gmail ;
-8. rend compte en trois phrases.
+8. exporte l'instantané vers ce dépôt (CSV, page, brief du jour — commit `Passage hebdo AAAA-MM-JJ — N nouveautés` sur `main`) ;
+9. rend compte en trois phrases.
 
 Règle de fond : **rien d'inventé** — chaque ligne du registre vient d'une page ouverte, avec son URL.
 

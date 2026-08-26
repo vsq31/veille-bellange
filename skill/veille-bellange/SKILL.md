@@ -74,6 +74,15 @@ Le connecteur Drive ne modifie pas le contenu d'un Sheet existant : on **réécr
 4. Même chose pour le Journal : ajouter une ligne `date, "Passage hebdo", nb ajoutées, nb signalées, "Brief n°N", remarques (sources en panne, alertes Gmail reçues ou non)`.
 5. Le Sheet Sources n'est réécrit que si une source change d'état (nouvelle source, blocage levé, alerte créée).
 
+### 5 bis. Exporter vers GitHub (s'exécute en fin de passage, après les étapes 6 et 7)
+Le dépôt `vsq31/veille-bellange` (branche `main`) est l'instantané versionné de la mémoire. À chaque passage hebdo, après la réécriture des Sheets, la republication de la page et le dépôt du brief :
+1. Écrire `data/registre.csv`, `data/sources.csv`, `data/journal.csv` = le contenu exact des trois Sheets réécrits (mêmes colonnes, mêmes lignes, UTF-8). Ne réécrire `sources.csv` que si le Sheet Sources a changé.
+2. Écrire `dashboard/artifact.html` = le HTML produit à l'étape 6 (celui publié en Artifact), et `dashboard/index.html` = le même contenu enveloppé dans `<!doctype html>\n<html lang="fr">\n<head>` (charset + viewport + `<style>`) `</head>\n<body>` … `</body>\n</html>` — même assemblage que `scripts/build_dashboard.py`.
+3. Ajouter `docs/briefs/AAAA-MM-JJ-brief-N.md` = copie Markdown du brief déposé en brouillon à l'étape 7 (N = numéro du brief, celui du Journal).
+4. Un seul commit : `Passage hebdo AAAA-MM-JJ — N nouveautés` (`rien de neuf` si N = 0), poussé sur `main`.
+5. Si `git push` renvoie 403 (« Claude doesn't have GitHub access » — app GitHub non liée à la session), ne pas insister : passer par les outils GitHub MCP — un appel `push_files` (owner `vsq31`, repo `veille-bellange`, branch `main`) avec tous les fichiers modifiés = un commit. C'est la voie qui a fonctionné le 26/08/2026.
+6. `data/registre.xlsx` n'est **pas** versionné (binaire, l'API ne pousse que du texte) : il se régénère localement avec `scripts/build_registre.py` pour l'état initial.
+
 ### 6. Mettre à jour la page
 1. Charger `references/dashboard_template.html`.
 2. Remplacer `__DATA__` par le JSON de toutes les lignes du registre (`id, vu, cat, titre, det, src, typ, pays, date, est, prix, statut, url, nouveau`) — `nouveau: true` pour les lignes ajoutées à ce passage ; `__JOURNAL__` par le journal complet (`date, type, ajout, brief, note`) ; `__ALERTES__` par la liste des alertes (triplets `plateforme, quoi, niveau`) en retirant celles que Jérôme a confirmé avoir créées.
@@ -83,7 +92,7 @@ Le connecteur Drive ne modifie pas le contenu d'un Sheet existant : on **réécr
 `create_draft` Gmail (brouillon, **pas d'envoi** — choix de Jérôme du 25/08/2026 ; il relit et envoie lui-même ou le lit directement dans les brouillons), destinataire Jérôme, objet `Veille Bellangé — semaine du JJ/MM : N nouveautés` (ou `rien de neuf`). Corps HTML simple, structure de `references/brief_template.md`. Toujours créer le brouillon, même vide : un brief « rien de neuf, 9 sources balayées, alertes Gmail : 0 » vaut mieux que le silence, il prouve que la veille tourne. Si Jérôme demande un jour « envoie directement », passer à `send_message` et noter le changement ici. Une pièce majeure (peinture, aquarelle ou dessin signé, estimation > 1 000 €, ou vente dans moins de 10 jours) va en tête, en gras, avec la date limite.
 
 ### 8. Rendre compte
-Fin de session : trois phrases — nombre de nouveautés, la plus importante, ce qui n'a pas pu être vérifié. Lien de la page et du registre.
+Fin de session : trois phrases — nombre de nouveautés, la plus importante, ce qui n'a pas pu être vérifié. Lien de la page, du registre et du commit GitHub du passage (étape 5 bis).
 
 ## Règles de fond
 
