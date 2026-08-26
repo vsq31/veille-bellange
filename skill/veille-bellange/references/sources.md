@@ -95,11 +95,16 @@ Requêtes web utiles (WebSearch) : `Bellangé lot enchères`, `Bellangé aquarel
 
 ## Alertes e-mail à créer par Jérôme (une fois)
 
+Toutes les alertes s'enregistrent avec la **boîte dédiée `hippolyte.bellange@gmail.com`** (créée le 26/08/2026).
+
 Indispensables : Interencheres (mot-clé « Bellangé »), Drouot.com (« Bellangé »), eBay.fr (recherche sauvegardée « Bellangé » catégories Art, avec notification).
 Utiles : Leboncoin, Catawiki, Delcampe, Invaluable, Proantic, AbeBooks, Google Alerts (« Hippolyte Bellangé », hebdo), Google Scholar (« Hippolyte Bellangé »).
 Optionnelles : Gazette Drouot (newsletter), MutualArt (follow), Barnebys, newsletters Osenat / Galerie Napoléon / Estampes MAS.
 
-Conseil : créer un filtre Gmail qui applique le label `Veille Bellangé` à tout message contenant « Bellangé » ou « Bellange » venant de ces expéditeurs, pour que la skill les retrouve d'un seul `search_threads`.
+Plomberie (une fois) :
+1. Dans `hippolyte.bellange@gmail.com` : Paramètres → Transfert → ajouter `jerome.gays@brasserie-du-venasque.com` (code de confirmation à valider), puis activer « Transférer une copie » (conserver la copie dans la boîte dédiée).
+2. Dans la boîte de Jérôme : filtre `to:hippolyte.bellange@gmail.com` → appliquer le label `Veille Bellangé` (+ « Ne pas afficher dans la boîte de réception » pour ne pas polluer). Le label existe (id `Label_12`).
+3. La veille lit la boîte de Jérôme : `to:hippolyte.bellange@gmail.com newer_than:8d`, `label:"Veille Bellangé"`, et mot-clé en filet.
 
 ## Repères de cote (registre au 25/08/2026)
 

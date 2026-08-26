@@ -29,7 +29,7 @@ ID : `B` + 4 chiffres, séquentiel (dernier : B0072). Dédup par URL normalisée
 - **Rien d'inventé.** Chaque ligne vient d'une page ouverte, URL en colonne M, prix tels qu'affichés, devise d'origine.
 - Peintures / aquarelles / dessins d'abord ; lithographies et livres regroupés. Les invendus comptent.
 - Homonymes à exclure : Jacques Bellange (graveur 1575-1616), ébénistes Bellangé, Eugène Bellangé (fils), Aurélien Bellanger.
-- Sources bloquées aux robots (Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe, Cairn, HAL, Gazette Drouot, Tribune de l'Art) : ne pas insister, elles arrivent par les alertes Gmail.
+- Sources bloquées aux robots (Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe, Cairn, HAL, Gazette Drouot, Tribune de l'Art) : ne pas insister, elles arrivent par les alertes Gmail — enregistrées avec la boîte dédiée `hippolyte.bellange@gmail.com`, transférée vers la boîte de Jérôme (label « Veille Bellangé »).
 - Le brief est **déposé en brouillon** Gmail, jamais envoyé sans que Jérôme le demande.
 - Ne jamais acheter, enchérir, ni contacter un vendeur.
 

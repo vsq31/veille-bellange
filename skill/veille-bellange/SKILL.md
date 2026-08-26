@@ -29,7 +29,9 @@ Deux objectifs, dans cet ordre de priorité :
 | Sources (Google Sheet) | titre `Veille Bellangé — Sources` |
 | Journal (Google Sheet) | titre `Veille Bellangé — Journal` |
 | Page tableau de bord (Artifact) | `https://claude.ai/code/artifact/2d934825-e061-4bd9-b3e8-a49f6e33fbee` — republier avec `url` pour garder l'adresse |
+| Page publique (GitHub Pages) | `https://vsq31.github.io/veille-bellange/` — redéployée à chaque push sur `main` |
 | Destinataire du brief | jerome.gays@brasserie-du-venasque.com |
+| Boîte à alertes | `hippolyte.bellange@gmail.com` — boîte Gmail dédiée où sont enregistrées toutes les alertes des plateformes ; transfert automatique vers la boîte de Jérôme, où un filtre `to:hippolyte.bellange@gmail.com` pose le label « Veille Bellangé » (id `Label_12`). La veille lit la boîte de Jérôme, pas la boîte dédiée. |
 
 Colonnes du registre (ne pas en changer l'ordre) : `ID, Date vue, Catégorie, Titre, Détails, Source, Type source, Pays, Date vente / publication, Estimation, Prix, Statut, URL, Intérêt (à remplir), Mes notes`.
 
@@ -48,7 +50,7 @@ Vocabulaire contrôlé :
 3. Noter le dernier ID et la date du dernier passage (Journal).
 
 ### 2. Lire Gmail (alertes des plateformes)
-`search_threads` sur la période depuis le dernier passage : `Bellangé OR Bellange newer_than:8d` plus, si le label `Veille Bellangé` existe, `label:"Veille Bellangé"`. Sources attendues : Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe, Invaluable, Proantic, Google Alerts, Google Scholar, newsletters Gazette Drouot / Osenat / galeries. Extraire chaque lot ou article mentionné (titre, URL, date de vente, estimation). Ignorer les homonymes (voir § Bruit). Ces alertes couvrent précisément les sites que les robots ne peuvent pas ouvrir : c'est la source la plus importante pour Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe.
+Les alertes sont enregistrées sur les plateformes avec l'adresse dédiée `hippolyte.bellange@gmail.com`, transférée automatiquement dans la boîte de Jérôme (label « Veille Bellangé », les messages peuvent sauter la boîte de réception). `search_threads` sur la période depuis le dernier passage, trois requêtes complémentaires : `to:hippolyte.bellange@gmail.com newer_than:8d` (la principale), `label:"Veille Bellangé" newer_than:8d`, et `(Bellangé OR Bellange) newer_than:8d` en filet. Si la première requête ne renvoie rien depuis trois passages, vérifier dans le brief que le transfert automatique fonctionne toujours. Sources attendues : Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe, Invaluable, Proantic, Google Alerts, Google Scholar, newsletters Gazette Drouot / Osenat / galeries. Extraire chaque lot ou article mentionné (titre, URL, date de vente, estimation). Ignorer les homonymes (voir § Bruit). Ces alertes couvrent précisément les sites que les robots ne peuvent pas ouvrir : c'est la source la plus importante pour Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe.
 
 ### 3. Balayer le web (4 explorateurs en parallèle, `Agent` general-purpose)
 Donner à chacun : l'identité de l'artiste, les orthographes (`Bellangé`, `Bellange`, `Hyppolite Bellangé`, `H. Bellangé`, `hte Bellangé`), la borne de date (depuis le dernier passage, avec 7 jours de marge), la liste d'URL connues à ne pas re-signaler, et le format de retour (une ligne par item : titre ; catégorie ; source ; pays ; date ; estimation ; prix ; statut ; URL exacte). Consigne absolue : **n'inventer aucune donnée, ne retourner que ce qui a été vu sur une page ouverte, avec son URL**. Périmètres :
