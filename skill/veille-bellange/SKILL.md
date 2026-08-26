@@ -79,7 +79,7 @@ Le dépôt `vsq31/veille-bellange` (branche `main`) est l'instantané versionné
 1. Écrire `data/registre.csv`, `data/sources.csv`, `data/journal.csv` = le contenu exact des trois Sheets réécrits (mêmes colonnes, mêmes lignes, UTF-8). Ne réécrire `sources.csv` que si le Sheet Sources a changé.
 2. Écrire `dashboard/artifact.html` = le HTML produit à l'étape 6 (celui publié en Artifact), et `dashboard/index.html` = le même contenu enveloppé dans `<!doctype html>\n<html lang="fr">\n<head>` (charset + viewport + `<style>`) `</head>\n<body>` … `</body>\n</html>` — même assemblage que `scripts/build_dashboard.py`.
 3. Ajouter `docs/briefs/AAAA-MM-JJ-brief-N.md` = copie Markdown du brief déposé en brouillon à l'étape 7 (N = numéro du brief, celui du Journal).
-4. Un seul commit : `Passage hebdo AAAA-MM-JJ — N nouveautés` (`rien de neuf` si N = 0), poussé sur `main`.
+4. Un seul commit : `Passage hebdo AAAA-MM-JJ — N nouveautés` (`rien de neuf` si N = 0), poussé sur `main`. Le push redéploie automatiquement la page publique GitHub Pages `https://vsq31.github.io/veille-bellange/` (workflow `.github/workflows/pages.yml`).
 5. Si `git push` renvoie 403 (« Claude doesn't have GitHub access » — app GitHub non liée à la session), ne pas insister : passer par les outils GitHub MCP — un appel `push_files` (owner `vsq31`, repo `veille-bellange`, branch `main`) avec tous les fichiers modifiés = un commit. C'est la voie qui a fonctionné le 26/08/2026.
 6. `data/registre.xlsx` n'est **pas** versionné (binaire, l'API ne pousse que du texte) : il se régénère localement avec `scripts/build_registre.py` pour l'état initial.
 

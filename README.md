@@ -9,6 +9,8 @@ Deux objectifs :
 
 Le principe : une **mémoire** (le registre) qui liste tout ce qui a déjà été vu, un **passage hebdomadaire** qui balaie les sources et les alertes e-mail, et ne signale que l'inédit, un **brief** déposé dans Gmail, et une **page** qui garde l'historique et construit la cote au fil des mois.
 
+**Page publique : https://vsq31.github.io/veille-bellange/** — GitHub Pages, redéployée depuis `dashboard/` à chaque push sur `main`.
+
 ## Architecture
 
 ```
