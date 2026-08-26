@@ -1,0 +1,296 @@
+<title>Veille Bellangé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --paper:#F2F3EF; --surface:#FFFFFF; --surface-2:#E9EBE5; --line:#D5D8D0;
+  --ink:#1E2230; --ink-2:#4B5162; --ink-3:#7A806F;
+  --prusse:#2B4C7E; --prusse-soft:#DCE5F2; --garance:#A4322E; --garance-soft:#F3DEDC;
+  --sepia:#7A6A56; --sepia-soft:#EDE6DB;
+  --cat-peinture:#2B4C7E; --cat-aquarelle:#3B7A8C; --cat-dessin:#7A6A56; --cat-litho:#6E7C5A; --cat-livre:#8B6B3E; --cat-publi:#5B4B7A; --cat-divers:#8A8A8A;
+  --ok:#3F7A4E; --warn:#B0761F; --bad:#A4322E;
+  --shadow:0 1px 0 rgba(30,34,48,.06), 0 8px 24px -16px rgba(30,34,48,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14171E; --surface:#1C2029; --surface-2:#242935; --line:#323848;
+    --ink:#E8E6DE; --ink-2:#B4B6AE; --ink-3:#7F8479;
+    --prusse:#8FB0DE; --prusse-soft:#22314A; --garance:#E07A72; --garance-soft:#3E2523;
+    --sepia:#C2AE92; --sepia-soft:#2E2922;
+    --cat-peinture:#8FB0DE; --cat-aquarelle:#7CC0D0; --cat-dessin:#C2AE92; --cat-litho:#A9B98F; --cat-livre:#D0A46E; --cat-publi:#B39FDB; --cat-divers:#9A9A9A;
+    --ok:#7FC08F; --warn:#E0A650; --bad:#E07A72;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14171E; --surface:#1C2029; --surface-2:#242935; --line:#323848;
+  --ink:#E8E6DE; --ink-2:#B4B6AE; --ink-3:#7F8479;
+  --prusse:#8FB0DE; --prusse-soft:#22314A; --garance:#E07A72; --garance-soft:#3E2523;
+  --sepia:#C2AE92; --sepia-soft:#2E2922;
+  --cat-peinture:#8FB0DE; --cat-aquarelle:#7CC0D0; --cat-dessin:#C2AE92; --cat-litho:#A9B98F; --cat-livre:#D0A46E; --cat-publi:#B39FDB; --cat-divers:#9A9A9A;
+  --ok:#7FC08F; --warn:#E0A650; --bad:#E07A72;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--prusse)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--prusse);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
+
+/* masthead */
+.mast{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.mast .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+.mast h1{font-family:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;font-weight:500;font-size:clamp(34px,5vw,54px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.mast h1 em{font-style:italic;font-weight:400;color:var(--prusse)}
+.mast .sub{margin:10px 0 0;color:var(--ink-2);max-width:62ch}
+.mast .stamp{text-align:right;color:var(--ink-3);font-size:13px;line-height:1.4}
+.mast .stamp b{display:block;color:var(--ink);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 8px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;box-shadow:var(--shadow);cursor:pointer;text-align:left;color:inherit;font:inherit}
+.kpi:hover{border-color:var(--prusse)}
+.kpi.active{border-color:var(--prusse);box-shadow:inset 0 0 0 1px var(--prusse)}
+.kpi .n{font-family:"Bodoni Moda",Georgia,serif;font-size:34px;line-height:1;font-weight:500;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+.kpi .h{font-size:12px;color:var(--ink-2);margin-top:4px}
+
+/* layout */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;margin-top:22px}
+@media (max-width:900px){.cols{grid-template-columns:1fr}}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.toolbar input[type=search]{flex:1 1 220px;min-width:180px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);font:inherit}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer;font:inherit;font-size:12.5px;display:inline-flex;align-items:center;gap:6px}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--c,var(--ink-3))}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.on .dot{outline:2px solid var(--paper)}
+.count{color:var(--ink-3);font-size:13px;margin:6px 0 14px}
+
+/* list */
+.group{margin-bottom:26px}
+.group h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;font-size:22px;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.group h2 small{font-family:"IBM Plex Sans",sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.item{display:grid;grid-template-columns:4px minmax(0,1fr) auto;gap:0 14px;background:var(--surface);border:1px solid var(--line);border-radius:6px;margin-bottom:8px;box-shadow:var(--shadow);overflow:hidden}
+.item .stripe{background:var(--c)}
+.item .main{padding:12px 0 12px 14px;min-width:0}
+.item .side{padding:12px 14px 12px 0;text-align:right;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-variant-numeric:tabular-nums}
+.item .t{font-weight:600;line-height:1.3}
+.item .t a{color:inherit;text-decoration:none}
+.item .t a:hover{text-decoration:underline;text-decoration-color:var(--prusse)}
+.item .d{color:var(--ink-2);font-size:13.5px;margin-top:3px}
+.item .m{color:var(--ink-3);font-size:12.5px;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 12px}
+.item .m .cat{color:var(--c);font-weight:500}
+.item .price{font-weight:600;font-size:15px}
+.item .est{color:var(--ink-2);font-size:12.5px}
+.new{display:inline-block;background:var(--garance);color:#fff;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.pill{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface-2)}
+.pill.venir{background:var(--garance-soft);color:var(--garance);border-color:transparent;font-weight:600}
+.pill.vente{background:var(--prusse-soft);color:var(--prusse);border-color:transparent;font-weight:600}
+.pill.vendu{background:var(--sepia-soft);color:var(--sepia);border-color:transparent}
+.pill.publie{background:var(--surface-2)}
+@media (max-width:600px){.item{grid-template-columns:4px minmax(0,1fr)}.item .side{grid-column:2;padding:0 14px 12px 14px;align-items:flex-start;text-align:left}}
+
+/* sidebar */
+.side-col>section{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;margin-bottom:16px;box-shadow:var(--shadow)}
+.side-col h3{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;font-size:19px;margin:0 0 10px}
+.side-col p{margin:0 0 8px;color:var(--ink-2);font-size:13.5px}
+.alert{display:grid;grid-template-columns:1fr auto;gap:8px;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.alert:first-of-type{border-top:0}
+.alert b{font-weight:600}
+.alert span{display:block;color:var(--ink-3);font-size:12px}
+.tag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;align-self:start;white-space:nowrap}
+.tag.ind{background:var(--garance-soft);color:var(--garance)}
+.tag.uti{background:var(--prusse-soft);color:var(--prusse)}
+.tag.opt{background:var(--surface-2);color:var(--ink-3)}
+.jrow{padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.jrow:first-of-type{border-top:0}
+.jrow b{font-variant-numeric:tabular-nums}
+.jrow span{color:var(--ink-2);display:block;margin-top:2px}
+.cote{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13px}
+.cote div:nth-child(even){text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.cote div:nth-child(odd){color:var(--ink-2)}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 20px}
+.foot a{color:var(--ink-2)}
+@media (prefers-reduced-motion:no-preference){.item{transition:border-color .15s}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <p class="eyebrow">Veille artistique · marché &amp; bibliographie</p>
+      <h1>Hippolyte <em>Bellangé</em></h1>
+      <p class="sub">Peintre et lithographe de l'épopée napoléonienne (1800–1866). Tout ce qui passe en vente et tout ce qui se publie, relevé chaque semaine et dédupliqué contre le registre.</p>
+    </div>
+    <div class="stamp">Dernier passage<b id="lastRun">—</b><span id="entries">—</span></div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="cols">
+    <div>
+      <div class="toolbar">
+        <input type="search" id="q" placeholder="Rechercher un titre, une maison, une technique…" aria-label="Rechercher">
+        <div class="chips" id="catChips"></div>
+      </div>
+      <div class="count" id="count"></div>
+      <div id="list"></div>
+    </div>
+
+    <aside class="side-col">
+      <section>
+        <h3>Alertes e-mail à créer</h3>
+        <p>Ces plateformes refusent les robots mais envoient des alertes. Une fois créées avec le mot-clé « Bellangé », elles arrivent dans Gmail et la veille les lit.</p>
+        <div id="alertes"></div>
+      </section>
+      <section>
+        <h3>Repères de cote</h3>
+        <div class="cote">
+          <div>Grande huile (Salon, &gt; 1 m)</div><div>12 500 – 57 000 €</div>
+          <div>Huile moyenne (50–100 cm)</div><div>2 300 – 6 500 €</div>
+          <div>Petit panneau / HST &lt; 45 cm</div><div>330 – 2 300 €</div>
+          <div>Dessin annoté / aquarelle importante</div><div>700 – 4 000 €</div>
+          <div>Aquarelle courante</div><div>250 – 700 €</div>
+          <div>Litho rare, album complet</div><div>300 – 2 000 €</div>
+          <div>Litho courante, planche d'uniforme</div><div>20 – 260 €</div>
+        </div>
+        <p style="margin-top:10px;font-size:12px">Fourchettes issues des résultats du registre (2015–2026) et de la fiche Millon. Se raffinera à chaque passage.</p>
+      </section>
+      <section>
+        <h3>Journal des passages</h3>
+        <div id="journal"></div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <span>Registre : <a href="https://docs.google.com/spreadsheets/d/1zFazV5Abx4_2MNcwpQicJjqAy_W92bUj_NKW0hqVVeA/edit" target="_blank" rel="noopener">Google Sheet « Veille Bellangé — Registre »</a></span>
+    <span>Sources : <a href="https://docs.google.com/spreadsheets/d/17OLnkqreEcBjhwzABM73w_ONjU_SY-0XzLFtm8EIxDI/edit" target="_blank" rel="noopener">liste et état d'accès</a></span>
+    <span>Auteure à suivre : <a href="https://cv.hal.science/solene-sazio" target="_blank" rel="noopener">Solène Sazio (HAL)</a></span>
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const JOURNAL = __JOURNAL__;
+const ALERTES = __ALERTES__;
+
+const CATS = {
+  "Peinture":"--cat-peinture","Aquarelle-gouache":"--cat-aquarelle","Dessin":"--cat-dessin",
+  "Lithographie-estampe":"--cat-litho","Livre illustré":"--cat-livre","Publication":"--cat-publi","Objet-divers":"--cat-divers"
+};
+const CAT_LABEL = {"Peinture":"Peintures","Aquarelle-gouache":"Aquarelles & gouaches","Dessin":"Dessins","Lithographie-estampe":"Lithographies & estampes","Livre illustré":"Livres illustrés","Publication":"Publications","Objet-divers":"Divers"};
+
+function groupOf(r){
+  if(r.cat==="Publication") return "publi";
+  if(r.statut==="À venir") return "venir";
+  if(r.statut==="En vente") return "vente";
+  if(/réf\. cote/.test(r.det)) return "cote";
+  return "resultat";
+}
+const GROUPS = [
+  ["venir","Ventes à venir","enchères annoncées"],
+  ["vente","En vente actuellement","marchands, galeries, marketplaces"],
+  ["resultat","Passé en vente depuis 2025","résultats et invendus"],
+  ["publi","Publications & actualités","articles, notices, expositions"],
+  ["cote","Références de cote","résultats antérieurs marquants"]
+];
+function pillClass(s){
+  if(s==="À venir") return "venir";
+  if(s==="En vente") return "vente";
+  if(s==="Vendu") return "vendu";
+  if(s==="Publié") return "publie";
+  return "";
+}
+function host(u){try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return ""}}
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+let state = {group:null, cats:new Set(), q:""};
+
+function renderKpis(){
+  const counts = {};
+  DATA.forEach(r=>{const g=groupOf(r);counts[g]=(counts[g]||0)+1});
+  const nouveaux = DATA.filter(r=>r.nouveau).length;
+  const k = document.getElementById("kpis");
+  k.innerHTML = "";
+  const tiles = [
+    ["nouveau","Nouveautés","depuis le dernier passage",nouveaux],
+    ["venir","À venir","enchères annoncées",counts.venir||0],
+    ["vente","En vente","chez les marchands",counts.vente||0],
+    ["resultat","Passés en vente","depuis janvier 2025",counts.resultat||0],
+    ["publi","Publications","2024–2026 + socle",counts.publi||0],
+  ];
+  tiles.forEach(([g,l,h,n])=>{
+    const b=document.createElement("button");
+    b.className="kpi"+(state.group===g?" active":"");
+    b.innerHTML=`<div class="n">${n}</div><div class="l">${l}</div><div class="h">${h}</div>`;
+    b.onclick=()=>{state.group = state.group===g?null:g; render()};
+    k.appendChild(b);
+  });
+}
+function renderChips(){
+  const c=document.getElementById("catChips"); c.innerHTML="";
+  Object.keys(CATS).forEach(cat=>{
+    const b=document.createElement("button");
+    b.className="chip"+(state.cats.has(cat)?" on":"");
+    b.style.setProperty("--c",`var(${CATS[cat]})`);
+    b.innerHTML=`<span class="dot"></span>${CAT_LABEL[cat]}`;
+    b.onclick=()=>{state.cats.has(cat)?state.cats.delete(cat):state.cats.add(cat);render()};
+    c.appendChild(b);
+  });
+}
+function matches(r){
+  if(state.group==="nouveau" && !r.nouveau) return false;
+  if(state.group && state.group!=="nouveau" && groupOf(r)!==state.group) return false;
+  if(state.cats.size && !state.cats.has(r.cat)) return false;
+  if(state.q){
+    const hay=(r.titre+" "+r.det+" "+r.src+" "+r.cat+" "+r.statut).toLowerCase();
+    if(!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+function itemHtml(r){
+  const c=`var(${CATS[r.cat]||"--cat-divers"})`;
+  const price = r.prix && !/^(Non|Paywall|Sans)/.test(r.prix) ? r.prix : (r.prix||"");
+  return `<article class="item" style="--c:${c}">
+    <div class="stripe"></div>
+    <div class="main">
+      <div class="t">${r.nouveau?'<span class="new">Nouveau</span>':''}<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.titre)}</a></div>
+      ${r.det?`<div class="d">${esc(r.det)}</div>`:""}
+      <div class="m"><span class="cat">${esc(r.cat)}</span><span>${esc(r.src)}</span>${r.pays?`<span>${esc(r.pays)}</span>`:""}${r.date?`<span>${esc(r.date)}</span>`:""}<span>${esc(host(r.url))}</span></div>
+    </div>
+    <div class="side">
+      <span class="pill ${pillClass(r.statut)}">${esc(r.statut)}</span>
+      ${price?`<span class="price">${esc(price)}</span>`:""}
+      ${r.est?`<span class="est">est. ${esc(r.est)}</span>`:""}
+    </div>
+  </article>`;
+}
+function renderList(){
+  const list=document.getElementById("list"); list.innerHTML="";
+  const rows=DATA.filter(matches);
+  document.getElementById("count").textContent = rows.length+" entrée"+(rows.length>1?"s":"")+" affichée"+(rows.length>1?"s":"")+" sur "+DATA.length;
+  GROUPS.forEach(([g,title,sub])=>{
+    const rs=rows.filter(r=>groupOf(r)===g);
+    if(!rs.length) return;
+    const order={"Peinture":0,"Aquarelle-gouache":1,"Dessin":2,"Lithographie-estampe":3,"Livre illustré":4,"Objet-divers":5,"Publication":6};
+    rs.sort((a,b)=>(b.nouveau-a.nouveau)||(order[a.cat]-order[b.cat])||(b.date||"").localeCompare(a.date||""));
+    const sec=document.createElement("section"); sec.className="group";
+    sec.innerHTML=`<h2>${title}<small>${sub} · ${rs.length}</small></h2>`+rs.map(itemHtml).join("");
+    list.appendChild(sec);
+  });
+  if(!rows.length) list.innerHTML='<p class="count">Rien ne correspond à ce filtre.</p>';
+}
+function renderSide(){
+  document.getElementById("alertes").innerHTML = ALERTES.map(([p,w,lvl])=>`<div class="alert"><div><b>${esc(p)}</b><span>${esc(w)}</span></div><span class="tag ${lvl==="indispensable"?"ind":lvl==="utile"?"uti":"opt"}">${lvl}</span></div>`).join("");
+  document.getElementById("journal").innerHTML = JOURNAL.slice().reverse().map(j=>`<div class="jrow"><b>${esc(j.date)}</b> · ${esc(j.type)} · ${j.ajout} entrée${j.ajout>1?"s":""} · ${esc(j.brief)}<span>${esc(j.note)}</span></div>`).join("");
+  const last=JOURNAL[JOURNAL.length-1];
+  document.getElementById("lastRun").textContent = last.date.split("-").reverse().join("/");
+  document.getElementById("entries").textContent = DATA.length+" entrées au registre";
+}
+function render(){renderKpis();renderChips();renderList()}
+document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value.trim().toLowerCase();renderList()});
+renderSide(); render();
+</script>

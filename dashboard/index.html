@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Veille Bellangé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --paper:#F2F3EF; --surface:#FFFFFF; --surface-2:#E9EBE5; --line:#D5D8D0;
+  --ink:#1E2230; --ink-2:#4B5162; --ink-3:#7A806F;
+  --prusse:#2B4C7E; --prusse-soft:#DCE5F2; --garance:#A4322E; --garance-soft:#F3DEDC;
+  --sepia:#7A6A56; --sepia-soft:#EDE6DB;
+  --cat-peinture:#2B4C7E; --cat-aquarelle:#3B7A8C; --cat-dessin:#7A6A56; --cat-litho:#6E7C5A; --cat-livre:#8B6B3E; --cat-publi:#5B4B7A; --cat-divers:#8A8A8A;
+  --ok:#3F7A4E; --warn:#B0761F; --bad:#A4322E;
+  --shadow:0 1px 0 rgba(30,34,48,.06), 0 8px 24px -16px rgba(30,34,48,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14171E; --surface:#1C2029; --surface-2:#242935; --line:#323848;
+    --ink:#E8E6DE; --ink-2:#B4B6AE; --ink-3:#7F8479;
+    --prusse:#8FB0DE; --prusse-soft:#22314A; --garance:#E07A72; --garance-soft:#3E2523;
+    --sepia:#C2AE92; --sepia-soft:#2E2922;
+    --cat-peinture:#8FB0DE; --cat-aquarelle:#7CC0D0; --cat-dessin:#C2AE92; --cat-litho:#A9B98F; --cat-livre:#D0A46E; --cat-publi:#B39FDB; --cat-divers:#9A9A9A;
+    --ok:#7FC08F; --warn:#E0A650; --bad:#E07A72;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14171E; --surface:#1C2029; --surface-2:#242935; --line:#323848;
+  --ink:#E8E6DE; --ink-2:#B4B6AE; --ink-3:#7F8479;
+  --prusse:#8FB0DE; --prusse-soft:#22314A; --garance:#E07A72; --garance-soft:#3E2523;
+  --sepia:#C2AE92; --sepia-soft:#2E2922;
+  --cat-peinture:#8FB0DE; --cat-aquarelle:#7CC0D0; --cat-dessin:#C2AE92; --cat-litho:#A9B98F; --cat-livre:#D0A46E; --cat-publi:#B39FDB; --cat-divers:#9A9A9A;
+  --ok:#7FC08F; --warn:#E0A650; --bad:#E07A72;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--prusse)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--prusse);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
+
+/* masthead */
+.mast{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.mast .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+.mast h1{font-family:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;font-weight:500;font-size:clamp(34px,5vw,54px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.mast h1 em{font-style:italic;font-weight:400;color:var(--prusse)}
+.mast .sub{margin:10px 0 0;color:var(--ink-2);max-width:62ch}
+.mast .stamp{text-align:right;color:var(--ink-3);font-size:13px;line-height:1.4}
+.mast .stamp b{display:block;color:var(--ink);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 8px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;box-shadow:var(--shadow);cursor:pointer;text-align:left;color:inherit;font:inherit}
+.kpi:hover{border-color:var(--prusse)}
+.kpi.active{border-color:var(--prusse);box-shadow:inset 0 0 0 1px var(--prusse)}
+.kpi .n{font-family:"Bodoni Moda",Georgia,serif;font-size:34px;line-height:1;font-weight:500;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+.kpi .h{font-size:12px;color:var(--ink-2);margin-top:4px}
+
+/* layout */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;margin-top:22px}
+@media (max-width:900px){.cols{grid-template-columns:1fr}}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.toolbar input[type=search]{flex:1 1 220px;min-width:180px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);font:inherit}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer;font:inherit;font-size:12.5px;display:inline-flex;align-items:center;gap:6px}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--c,var(--ink-3))}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.on .dot{outline:2px solid var(--paper)}
+.count{color:var(--ink-3);font-size:13px;margin:6px 0 14px}
+
+/* list */
+.group{margin-bottom:26px}
+.group h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;font-size:22px;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.group h2 small{font-family:"IBM Plex Sans",sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.item{display:grid;grid-template-columns:4px minmax(0,1fr) auto;gap:0 14px;background:var(--surface);border:1px solid var(--line);border-radius:6px;margin-bottom:8px;box-shadow:var(--shadow);overflow:hidden}
+.item .stripe{background:var(--c)}
+.item .main{padding:12px 0 12px 14px;min-width:0}
+.item .side{padding:12px 14px 12px 0;text-align:right;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-variant-numeric:tabular-nums}
+.item .t{font-weight:600;line-height:1.3}
+.item .t a{color:inherit;text-decoration:none}
+.item .t a:hover{text-decoration:underline;text-decoration-color:var(--prusse)}
+.item .d{color:var(--ink-2);font-size:13.5px;margin-top:3px}
+.item .m{color:var(--ink-3);font-size:12.5px;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 12px}
+.item .m .cat{color:var(--c);font-weight:500}
+.item .price{font-weight:600;font-size:15px}
+.item .est{color:var(--ink-2);font-size:12.5px}
+.new{display:inline-block;background:var(--garance);color:#fff;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.pill{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface-2)}
+.pill.venir{background:var(--garance-soft);color:var(--garance);border-color:transparent;font-weight:600}
+.pill.vente{background:var(--prusse-soft);color:var(--prusse);border-color:transparent;font-weight:600}
+.pill.vendu{background:var(--sepia-soft);color:var(--sepia);border-color:transparent}
+.pill.publie{background:var(--surface-2)}
+@media (max-width:600px){.item{grid-template-columns:4px minmax(0,1fr)}.item .side{grid-column:2;padding:0 14px 12px 14px;align-items:flex-start;text-align:left}}
+
+/* sidebar */
+.side-col>section{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;margin-bottom:16px;box-shadow:var(--shadow)}
+.side-col h3{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;font-size:19px;margin:0 0 10px}
+.side-col p{margin:0 0 8px;color:var(--ink-2);font-size:13.5px}
+.alert{display:grid;grid-template-columns:1fr auto;gap:8px;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.alert:first-of-type{border-top:0}
+.alert b{font-weight:600}
+.alert span{display:block;color:var(--ink-3);font-size:12px}
+.tag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;align-self:start;white-space:nowrap}
+.tag.ind{background:var(--garance-soft);color:var(--garance)}
+.tag.uti{background:var(--prusse-soft);color:var(--prusse)}
+.tag.opt{background:var(--surface-2);color:var(--ink-3)}
+.jrow{padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.jrow:first-of-type{border-top:0}
+.jrow b{font-variant-numeric:tabular-nums}
+.jrow span{color:var(--ink-2);display:block;margin-top:2px}
+.cote{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13px}
+.cote div:nth-child(even){text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.cote div:nth-child(odd){color:var(--ink-2)}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 20px}
+.foot a{color:var(--ink-2)}
+@media (prefers-reduced-motion:no-preference){.item{transition:border-color .15s}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <p class="eyebrow">Veille artistique · marché &amp; bibliographie</p>
+      <h1>Hippolyte <em>Bellangé</em></h1>
+      <p class="sub">Peintre et lithographe de l'épopée napoléonienne (1800–1866). Tout ce qui passe en vente et tout ce qui se publie, relevé chaque semaine et dédupliqué contre le registre.</p>
+    </div>
+    <div class="stamp">Dernier passage<b id="lastRun">—</b><span id="entries">—</span></div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="cols">
+    <div>
+      <div class="toolbar">
+        <input type="search" id="q" placeholder="Rechercher un titre, une maison, une technique…" aria-label="Rechercher">
+        <div class="chips" id="catChips"></div>
+      </div>
+      <div class="count" id="count"></div>
+      <div id="list"></div>
+    </div>
+
+    <aside class="side-col">
+      <section>
+        <h3>Alertes e-mail à créer</h3>
+        <p>Ces plateformes refusent les robots mais envoient des alertes. Une fois créées avec le mot-clé « Bellangé », elles arrivent dans Gmail et la veille les lit.</p>
+        <div id="alertes"></div>
+      </section>
+      <section>
+        <h3>Repères de cote</h3>
+        <div class="cote">
+          <div>Grande huile (Salon, &gt; 1 m)</div><div>12 500 – 57 000 €</div>
+          <div>Huile moyenne (50–100 cm)</div><div>2 300 – 6 500 €</div>
+          <div>Petit panneau / HST &lt; 45 cm</div><div>330 – 2 300 €</div>
+          <div>Dessin annoté / aquarelle importante</div><div>700 – 4 000 €</div>
+          <div>Aquarelle courante</div><div>250 – 700 €</div>
+          <div>Litho rare, album complet</div><div>300 – 2 000 €</div>
+          <div>Litho courante, planche d'uniforme</div><div>20 – 260 €</div>
+        </div>
+        <p style="margin-top:10px;font-size:12px">Fourchettes issues des résultats du registre (2015–2026) et de la fiche Millon. Se raffinera à chaque passage.</p>
+      </section>
+      <section>
+        <h3>Journal des passages</h3>
+        <div id="journal"></div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <span>Registre : <a href="https://docs.google.com/spreadsheets/d/1zFazV5Abx4_2MNcwpQicJjqAy_W92bUj_NKW0hqVVeA/edit" target="_blank" rel="noopener">Google Sheet « Veille Bellangé — Registre »</a></span>
+    <span>Sources : <a href="https://docs.google.com/spreadsheets/d/17OLnkqreEcBjhwzABM73w_ONjU_SY-0XzLFtm8EIxDI/edit" target="_blank" rel="noopener">liste et état d'accès</a></span>
+    <span>Auteure à suivre : <a href="https://cv.hal.science/solene-sazio" target="_blank" rel="noopener">Solène Sazio (HAL)</a></span>
+  </footer>
+</div>
+
+<script>
+const DATA = [{"id": "B0001", "vu": "2026-08-25", "cat": "Peinture", "titre": "Grenadier de la Garde en sentinelle", "det": "HST signée « H. BELLANGE », datée 1829, 35 × 53 cm (67 × 85 encadrée)", "src": "Galerie Dantan (Achicourt)", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "2 200 €", "statut": "En vente", "url": "https://en.dantan.store/product-page/joseph-louis-hippolyte-bellange-huile-sur-toile-grenadier-sign%C3%A9e-1800-1866", "nouveau": false}, {"id": "B0002", "vu": "2026-08-25", "cat": "Peinture", "titre": "The Four Militaries (attribué)", "det": "HST 22 × 31 cm, milieu XIXe, attribution non documentée par une signature", "src": "1stDibs — Gijsel Gallery (Genève)", "typ": "Marketplace", "pays": "CH", "date": "", "est": "", "prix": "1 152 $", "statut": "En vente", "url": "https://www.1stdibs.com/art/paintings/portrait-paintings/hippolyte-bellange-four-militaries-hippolyte-bellange-antique-oil-on-canvas/id-a_12523192/", "nouveau": false}, {"id": "B0003", "vu": "2026-08-25", "cat": "Aquarelle-gouache", "titre": "Scène de rue", "det": "Dessin/aquarelle signé « hte Bellangé », daté 1822, 22 × 17 cm, cadre doré XIXe", "src": "Proantic — Galerie Mazarini (Lyon)", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "2 350 €", "statut": "En vente", "url": "https://www.proantic.com/en/1546464-bellange-hippolyte-1800-1866-quotstreet-scenequot-drawingwatercolor-signed-and-dated-be.html", "nouveau": false}, {"id": "B0004", "vu": "2026-08-25", "cat": "Aquarelle-gouache", "titre": "Le Camp du duc d'Orléans près de Compiègne", "det": "Aquarelle signée « hte. Bgé. », datée 7bre 1836, 29 × 38 cm ; faite avec Raffet ; prov. probable vente après décès 1867", "src": "Galerie La Nouvelle Athènes (Paris)", "typ": "Marchand", "pays": "FR", "date": "2025-03-07", "est": "", "prix": "Sur demande", "statut": "En vente", "url": "https://lanouvelleathenes.fr/2025/03/07/hippolyte-bellange-1800-1866/", "nouveau": false}, {"id": "B0005", "vu": "2026-08-25", "cat": "Aquarelle-gouache", "titre": "La Vivandière de Wagram", "det": "Aquarelle gouachée signée, 1862, 22 × 30,5 cm ; exposée Beaux-Arts 1867 n°157", "src": "Galerie Christian Le Serbon (Paris)", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "Sur demande", "statut": "En vente", "url": "https://www.galerie-leserbon.fr/hippolyte-bellange-vivandiere-wagram/", "nouveau": false}, {"id": "B0006", "vu": "2026-08-25", "cat": "Dessin", "titre": "Bataille de Sébastopol", "det": "Lavis brun signé, annoté au dos « Sébastopol 1855 », 25,5 × 82,5 cm, pli central", "src": "Proantic — Galerie Mazarini (Lyon)", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "1 450 €", "statut": "En vente", "url": "https://www.proantic.com/en/657821-bellange-hippolyte-1800-1866-quotbattle-of-sebastopolquot-drawing-brown-wash-signed-anno.html", "nouveau": false}, {"id": "B0007", "vu": "2026-08-25", "cat": "Dessin", "titre": "Figure", "det": "Encre de Chine, 7 × 5,5 cm, milieu XIXe", "src": "1stDibs — Wallector (Rome)", "typ": "Marketplace", "pays": "IT", "date": "", "est": "", "prix": "Sur demande", "statut": "En vente", "url": "https://www.1stdibs.com/art/drawings-watercolor-paintings/figurative-drawings-watercolors/hippolyte-bellange-figure-original-drawing-china-ink-hippolyte-bellange-mid-19th-century/id-a_10777412/", "nouveau": false}, {"id": "B0008", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Album « Souvenirs militaires » (1834), Gihaut — 12 planches + couverture", "det": "En feuilles, 340 × 510 mm : Jemmapes, Mont Saint-Bernard, Marengo, Arcole, Moskowa, Montereau, Bastan, Landrecies, Retour de l'île d'Elbe, Guadarrama, Valmy, camp de Boulogne", "src": "Estampes MAS", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "2 000 €", "statut": "En vente", "url": "https://www.estampes-mas.fr/produit/bellange-souvenirs-militaires-album-1834/", "nouveau": false}, {"id": "B0009", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Bataille de la Moskowa (modèle de coloris)", "det": "Litho vers 1832, coupée au sujet, 185 × 300 mm", "src": "Estampes MAS", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "300 €", "statut": "En vente", "url": "https://www.estampes-mas.fr/produit/bellange-bataille-de-la-moskowa/", "nouveau": false}, {"id": "B0010", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Bataille de Marengo (modèle de coloris)", "det": "Litho signée/datée 1832, 190 × 310 mm", "src": "Estampes MAS", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "Non affiché", "statut": "En vente", "url": "https://www.estampes-mas.fr/produit/bellange-bataille-de-marengo/", "nouveau": false}, {"id": "B0011", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "La Garde meurt mais ne se rend pas", "det": "Litho 1849, 505 × 370 mm, mouillure angle (Aveline 409)", "src": "Estampes MAS", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "Non affiché", "statut": "En vente", "url": "https://www.estampes-mas.fr/produit/bellange-la-garde-meurt-mais-ne-se-rend-pas/", "nouveau": false}, {"id": "B0012", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "La Vivandière de Béranger", "det": "Litho Villain/Gihaut, 245 × 175 mm", "src": "Estampes MAS", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "30 €", "statut": "En vente", "url": "https://www.estampes-mas.fr/produit/bellange-la-vivandiere-de-beranger/", "nouveau": false}, {"id": "B0013", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Dédié à Madame Vve Charlet (1846)", "det": "Litho Villain/Gihaut, 42 × 57 cm, légère humidité", "src": "Pamono — vendeur Italie", "typ": "Marketplace", "pays": "IT", "date": "", "est": "", "prix": "397 $", "statut": "En vente", "url": "https://www.pamono.com/hippolyte-bellange-dedie-a-madame-vve-charlet-original-lithograph-1846", "nouveau": false}, {"id": "B0014", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Tiens bon, Turc ! Nous voilà, mon brave (Crimée, v. 1854)", "det": "1re édition, Auguste Bry / Delarue, feuille 45 × 58,5 cm", "src": "AbeBooks — Wittenborn Art Books (San Francisco)", "typ": "Marketplace", "pays": "US", "date": "", "est": "", "prix": "264,82 €", "statut": "En vente", "url": "https://www.abebooks.fr/art-affiches/bon-Turc-brave-Guerre-Crim%C3%A9e-1853-1856/30932387763/bd", "nouveau": false}, {"id": "B0015", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Tenez voyez-vous, Mr le Curé… (Albums lithographiques n°8, 1834)", "det": "Litho coloriée d'époque, image 17 × 20,5 cm", "src": "AbeBooks — Antiquariat Friederichsen (Hambourg)", "typ": "Marketplace", "pays": "DE", "date": "", "est": "", "prix": "300 €", "statut": "En vente", "url": "https://www.abebooks.fr/art-affiches/Tenez-Voyez-Vous-Cure-v%60la.l%60Pere-Eternel-Altkolorierte/15341477405/bd", "nouveau": false}, {"id": "B0016", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Le retour de l'Armée (Villain, v. 1835)", "det": "Litho coloriée", "src": "AbeBooks — Antiquariat Friederichsen (Hambourg)", "typ": "Marketplace", "pays": "DE", "date": "", "est": "", "prix": "Non relevé", "statut": "En vente", "url": "https://www.abebooks.fr/art-affiches/retour-Armee-Altkolorierte-Lithographie-Villain-Bellange/15341477401/bd", "nouveau": false}, {"id": "B0017", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Ces messieurs prennent leur café, à c'qui paraît (Gihaut, années 1830)", "det": "1re édition, 32 × 36,5 cm (Adeline 377)", "src": "AbeBooks — Wittenborn Art Books", "typ": "Marketplace", "pays": "US", "date": "", "est": "", "prix": "132,41 €", "statut": "En vente", "url": "https://www.abebooks.fr/art-affiches/messieurs-prennent-caf%C3%A9-cqui-parait-First/30932390553/bd", "nouveau": false}, {"id": "B0018", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Napoléon à Montereau (1828)", "det": "Litho originale 24,5 × 34 cm", "src": "1stDibs — Wallector (Rome)", "typ": "Marketplace", "pays": "IT", "date": "", "est": "", "prix": "Sur demande", "statut": "En vente", "url": "https://www.1stdibs.com/art/prints-works-on-paper/figurative-prints-works-on-paper/hippolyte-bellange-napoleon-montereau-original-lithograph-h-bellange-1828/id-a_4031282/", "nouveau": false}, {"id": "B0019", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Vive le Vin (Engelmann, v. 1825)", "det": "Litho à la teinte, feuille 34,8 × 26,7 cm (Béraldi p. 17)", "src": "1stDibs — Thomas French Fine Art (Ohio)", "typ": "Marketplace", "pays": "US", "date": "", "est": "", "prix": "Sur demande", "statut": "En vente", "url": "https://www.1stdibs.com/art/prints-works-on-paper/hippolyte-bellange-vive-le-vin/id-a_15017462/", "nouveau": false}, {"id": "B0020", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Grenadier (Villain, 1824), pl. 3", "det": "Litho coloriée 22,7 × 29,6 cm", "src": "AbeBooks — ThePrintsCollector (NL)", "typ": "Marketplace", "pays": "NL", "date": "", "est": "", "prix": "148,43 $", "statut": "En vente", "url": "https://www.abebooks.com/art-prints/Antique-Print-GRENADIER-MILITARY-INFANTRY-BAYONET-PL-3-Bellange-Villain-1824/22589589902/bd", "nouveau": false}, {"id": "B0021", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Bonaparte à Toulon (eau-forte, 1837, Norvins)", "det": "22 × 14 cm", "src": "Pamono — vendeur Italie", "typ": "Marketplace", "pays": "IT", "date": "", "est": "", "prix": "230 $", "statut": "En vente", "url": "https://www.pamono.com/hippolyte-bellange-napoleon-bonaparte-in-toulon-1837-etching", "nouveau": false}, {"id": "B0022", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Le Mendiant (Alliance des Arts)", "det": "Litho", "src": "eBay.fr — lefennec205 (Pluvigner)", "typ": "Marketplace", "pays": "FR", "date": "", "est": "", "prix": "25 €", "statut": "En vente", "url": "https://www.ebay.fr/itm/264629880742", "nouveau": false}, {"id": "B0023", "vu": "2026-08-25", "cat": "Livre illustré", "titre": "Adeline, « Hippolyte Bellangé et son œuvre » (Quantin 1880) — 1/50 sur Hollande", "det": "Maroquin rouge signé Pagnant, enrichi de 12 dessins originaux d'Adeline d'après Bellangé", "src": "Livre-rare-book — ILLIBRAIRIE (Genève)", "typ": "Marchand", "pays": "CH", "date": "", "est": "", "prix": "2 138,35 €", "statut": "En vente", "url": "https://www.livre-rare-book.com/book/20676660/4280", "nouveau": false}, {"id": "B0024", "vu": "2026-08-25", "cat": "Livre illustré", "titre": "Norvins, « Histoire de Napoléon », 21e éd. (Furne 1868), ill. Raffet, Charlet, Bellangé, Yan' Dargent", "det": "In-4, demi-veau aubergine, rousseurs", "src": "AbeBooks — Mesnard Comptoir du Livre Ancien", "typ": "Marketplace", "pays": "FR", "date": "", "est": "", "prix": "108,16 $", "statut": "En vente", "url": "https://www.abebooks.com/Histoire-Napol%C3%A9on-Norvins-Vingt-uni%C3%A8me-%C3%A9dition/19905379626/bd", "nouveau": false}, {"id": "B0025", "vu": "2026-08-25", "cat": "Livre illustré", "titre": "Collection des types de tous les corps et des uniformes militaires… (1844), 50 pl. coloriées", "det": "« A superb copy » — libraire et prix non lisibles", "src": "viaLibri", "typ": "Agrégateur", "pays": "", "date": "", "est": "", "prix": "Non lisible", "statut": "En vente", "url": "https://www.vialibri.net/years/books/361033254/1844-bellange-m-hippolyte-collection-des-types-de-tout-les", "nouveau": false}, {"id": "B0026", "vu": "2026-08-25", "cat": "Aquarelle-gouache", "titre": "Le départ du conscrit", "det": "Aquarelle signée/datée 1846, 25,7 × 30,5 cm encadrée", "src": "Nahum Gallery (Vitry-sur-Seine)", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "450 €", "statut": "Vendu", "url": "https://nahumgallery.com/en-inter/products/hippolyte-bellange-aquarelle-le-depart-du-conscrit", "nouveau": false}, {"id": "B0027", "vu": "2026-08-25", "cat": "Aquarelle-gouache", "titre": "Soldat blessé", "det": "Aquarelle 25,5 × 32 cm", "src": "Nahum Gallery", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "250 €", "statut": "Vendu", "url": "https://nahumgallery.com/en-inter/products/soldat-bellange", "nouveau": false}, {"id": "B0028", "vu": "2026-08-25", "cat": "Dessin", "titre": "Un ruffian à cheval", "det": "Crayon rehaussé d'aquarelle et encre, cadre XXe", "src": "Proantic — Antiquités de la Sapinière", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "550 €", "statut": "Vendu", "url": "https://www.proantic.com/en/1157734-dessin-d039-hippolyte-bellange-quot1800-1866-un-ruffian-a-cheval.html", "nouveau": false}, {"id": "B0029", "vu": "2026-08-25", "cat": "Dessin", "titre": "Triple Study of Soldier with Rifle", "det": "Dessin ; annonce clôturée par le vendeur le 13 juin 2026", "src": "eBay.com — museumcoin (Baltimore)", "typ": "Marketplace", "pays": "US", "date": "2026-06-13", "est": "", "prix": "295,95 $", "statut": "Clôturé", "url": "https://www.ebay.com/itm/235442304483", "nouveau": false}, {"id": "B0030", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Passage du pont d'Arcole (modèle de coloris)", "det": "Litho 1832", "src": "Estampes MAS", "typ": "Marchand", "pays": "FR", "date": "", "est": "", "prix": "", "statut": "Vendu", "url": "https://www.estampes-mas.fr/produit/bellange-passage-du-pont-darcole/", "nouveau": false}, {"id": "B0031", "vu": "2026-08-25", "cat": "Peinture", "titre": "Zouaves de la Garde impériale lors d'une halte, après la campagne de Crimée", "det": "HST signée b.g., 46 × 54 cm, restaurations, cadre Binant ; prov. Dr Nacquart ; peut-être n°447 du catalogue (anc. coll. Baroche)", "src": "Osenat — L'Empire à Fontainebleau, lot 234", "typ": "Maison de vente", "pays": "FR", "date": "2025-12-07", "est": "3 000 – 4 000 €", "prix": "Non publié", "statut": "Invendu probable", "url": "https://www.osenat.com/en/lot/169041/31518386-hippolyte-bellange-1800-1866-zouaves-of-the-imperial-guard", "nouveau": false}, {"id": "B0032", "vu": "2026-08-25", "cat": "Peinture", "titre": "The Barber of the Pays de Caux (d'après H. Bellangé)", "det": "Huile sur bois 33 × 41 cm ; passé le 28/10/2025 puis représenté le 05/05/2026 (maison masquée, paywall Artnet)", "src": "Artnet (maison non affichée)", "typ": "Agrégateur", "pays": "", "date": "2026-05-05", "est": "Paywall", "prix": "Paywall", "statut": "Inconnu", "url": "https://www.artnet.com/artists/hippolyte-bellangé/the-barber-of-the-pays-de-caux-IcD1M9GYh0m_zzhxIMtxTQ2", "nouveau": false}, {"id": "B0033", "vu": "2026-08-25", "cat": "Peinture", "titre": "Convoi militaire français arrivant dans un village (1829)", "det": "Technique non lue (probable HST) 32 × 46 cm", "src": "Carlo Bonte Auctions (Bruges) via Invaluable", "typ": "Maison de vente", "pays": "BE", "date": "2025-10-14", "est": "2 000 – 3 000 €", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.invaluable.com/auction-lot/hippolyte-bellange-1800-1866-french-military-conv-316-c-8a04df38e7", "nouveau": false}, {"id": "B0034", "vu": "2026-08-25", "cat": "Peinture", "titre": "Scène de bataille, HST signée", "det": "66 × 97 cm, lot 560", "src": "DVC (Gand) via the-saleroom / Invaluable", "typ": "Maison de vente", "pays": "BE", "date": "2025-06-22", "est": "700 – 1 200 €", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.the-saleroom.com/en-gb/auction-catalogues/dvc/catalogue-id-dvc-nv10062/lot-f6dd7cfc-578a-4c60-b228-b2f400b3e13b", "nouveau": false}, {"id": "B0035", "vu": "2026-08-25", "cat": "Peinture", "titre": "Deux tableaux encadrés, hommes en uniforme (lot 110)", "det": "Description issue de la vignette, technique non précisée — page de lot en 410", "src": "Bailleul & Nentas (Bayeux) via Interencheres", "typ": "Maison de vente", "pays": "FR", "date": "2026-07-14", "est": "200 – 300 €", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.interencheres.com/art-decoration/grande-vente-du-14-juillet-a-14h-684108", "nouveau": false}, {"id": "B0036", "vu": "2026-08-25", "cat": "Dessin", "titre": "Mousquetaire (Musketeer)", "det": "Dessin, vente 83 lot 6352", "src": "Bubb Kuyper (Haarlem) via Invaluable", "typ": "Maison de vente", "pays": "NL", "date": "2025-11-28", "est": "80 – 100 €", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.invaluable.com/auction-lot/bellange-hippolyte-1800-1866-musketeer-6352-c-d14d484cda", "nouveau": false}, {"id": "B0037", "vu": "2026-08-25", "cat": "Dessin", "titre": "Overgrown monument", "det": "Plume ; représenté à répétition (11/2023, 03/2024, 04/2024, 06/2025)", "src": "Fichter Kunsthandel (Francfort) via Invaluable", "typ": "Maison de vente", "pays": "DE", "date": "2025-06-14", "est": "1 200 – 1 600 €", "prix": "Non affiché", "statut": "Invendu probable", "url": "https://www.invaluable.com/auction-lot/h-bellange-1800-1866-overgrown-monument-around-18-15-c-67343b8acf", "nouveau": false}, {"id": "B0038", "vu": "2026-08-25", "cat": "Dessin", "titre": "Caricature — Cavalryman at the fire", "det": "Représenté depuis 02/2023", "src": "Fichter Kunsthandel via Invaluable", "typ": "Maison de vente", "pays": "DE", "date": "2025-05-18", "est": "60 – 100 €", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.invaluable.com/auction-lot/h-bellange-1800-1866-caricature-cavalryman-at-the-620-c-4664ab98f3", "nouveau": false}, {"id": "B0039", "vu": "2026-08-25", "cat": "Dessin", "titre": "Caricature — Woman and soldier", "det": "", "src": "Fichter Kunsthandel via Invaluable", "typ": "Maison de vente", "pays": "DE", "date": "2025-05-18", "est": "60 – 100 €", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.invaluable.com/auction-lot/h-bellange-1800-1866-caricature-woman-and-soldier-619-c-3d84434bb8", "nouveau": false}, {"id": "B0040", "vu": "2026-08-25", "cat": "Dessin", "titre": "Caricature — Couple fishing", "det": "", "src": "Fichter Kunsthandel via Invaluable", "typ": "Maison de vente", "pays": "DE", "date": "2025-05-18", "est": "60 – 100 €", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.invaluable.com/auction-lot/h-bellange-1800-1866-caricature-couple-fishing-li-618-c-9bc4d26ac8", "nouveau": false}, {"id": "B0041", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Dragon et Sapeur (Types de tous les corps, 1844)", "det": "16,5 × 12 cm, signée sur la pierre", "src": "Sopocki Dom Aukcyjny via OneBid", "typ": "Maison de vente", "pays": "PL", "date": "2025-04-05", "est": "215 €", "prix": "258 €", "statut": "Vendu", "url": "https://onebid.fr/fr/arts-graphiques-et-dessins-hippolyte-bellange-1800-1866-dragon-et-sapeur/2724782", "nouveau": false}, {"id": "B0042", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Général napoléonien", "det": "", "src": "Sopocki Dom Aukcyjny via OneBid", "typ": "Maison de vente", "pays": "PL", "date": "2025-04-05", "est": "", "prix": "258 €", "statut": "Vendu", "url": "https://onebid.fr/fr/arts-graphiques-et-dessins-hippolyte-bellange-1800-1866-general-napoleonien/2724783", "nouveau": false}, {"id": "B0043", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Portrait à cheval du prince Eugène de Beauharnais", "det": "", "src": "Sopocki Dom Aukcyjny via OneBid", "typ": "Maison de vente", "pays": "PL", "date": "2025-04-05", "est": "", "prix": "258 €", "statut": "Vendu", "url": "https://onebid.fr/fr/arts-graphiques-et-dessins-hippolyte-bellange-1800-1866-portrait-a-cheval-du-prince-eugen-beauharnais/2724784", "nouveau": false}, {"id": "B0044", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Soldats de la Garde de Napoléon", "det": "", "src": "Sopocki Dom Aukcyjny via OneBid", "typ": "Maison de vente", "pays": "PL", "date": "2025-04-05", "est": "", "prix": "258 €", "statut": "Vendu", "url": "https://onebid.fr/fr/arts-graphiques-et-dessins-hippolyte-bellange-1800-1866-soldats-de-la-garde-de-napoleon/2724785", "nouveau": false}, {"id": "B0045", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Chasseur à cheval 1812 / Officier d'ordonnance (Château de Lesko, 2 lots)", "det": "Lithos coloriées 19 × 15 cm, série Dubochet 1844", "src": "Mercari Polonia (Varsovie) via OneBid", "typ": "Maison de vente", "pays": "PL", "date": "2026-03-14", "est": "25 € chacun", "prix": "Sans enchère", "statut": "Invendu", "url": "https://onebid.fr/fr/arts-graphiques-et-dessins-lesko-castle-hippolyte-bellange-lithographie-du-19eme-siecle-horse-chaser-1812-chasseur-a-cheval-1812-famille-krasicki/3299367", "nouveau": false}, {"id": "B0046", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "4 estampes Bellangé", "det": "Lots 2634245-2634248", "src": "Dom Aukcyjny Ostoya (Varsovie) via OneBid", "typ": "Maison de vente", "pays": "PL", "date": "2025-02-08", "est": "47 € chacun", "prix": "Sans enchère", "statut": "Invendu", "url": "https://onebid.fr/fr/artist/aukcja/Hippolyte-Bellange", "nouveau": false}, {"id": "B0047", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Two lithographs (lot 45)", "det": "Old Master, British & European Pictures", "src": "Roseberys (Londres) via Invaluable", "typ": "Maison de vente", "pays": "UK", "date": "2025-07-09", "est": "100 – 150 £", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.invaluable.com/auction-lot/joseph-louis-hippolyte-bellange-french-1800-1866--45-c-f8847c68b8", "nouveau": false}, {"id": "B0048", "vu": "2026-08-25", "cat": "Lithographie-estampe", "titre": "Napoléon, deux gravures d'après Vernet et Bellangé (lot 24)", "det": "", "src": "Hôtel des Ventes Giraudeau (Tours)", "typ": "Maison de vente", "pays": "FR", "date": "2025-02-17", "est": "", "prix": "65 € (79,82 € TTC)", "statut": "Vendu", "url": "https://docs.prod-indb.io/2025/02/18/223435_613271382_99c0c394324e4f7b511d2a50999ef658.pdf", "nouveau": false}, {"id": "B0049", "vu": "2026-08-25", "cat": "Livre illustré", "titre": "Janin, « La Normandie » (Bourdin 1844), hors-textes d'après Bellangé et al. (lot 242)", "det": "", "src": "Maison non identifiée (PDF prod-indb)", "typ": "Maison de vente", "pays": "FR", "date": "2025-09-11", "est": "", "prix": "20 €", "statut": "Vendu", "url": "https://docs.prod-indb.io/2025/09/24/082234_574046984_49287f43269ccc9398973d69ccaf6b8f.pdf", "nouveau": false}, {"id": "B0050", "vu": "2026-08-25", "cat": "Livre illustré", "titre": "Militaria : livres et albums (12 pièces) dont « Costumes militaires français » de Bellangé (lot 1099)", "det": "Gallery Closure Hassfurther II", "src": "im Kinsky (Vienne) via the-saleroom", "typ": "Maison de vente", "pays": "AT", "date": "2025-05-21", "est": "Non affiché", "prix": "Non affiché", "statut": "Inconnu", "url": "https://www.the-saleroom.com/en-gb/auction-catalogues/imkinsky/catalogue-id-auktio1-10036/lot-292d5c95-4d81-4f10-8848-b2cf0180ee76", "nouveau": false}, {"id": "B0051", "vu": "2026-08-25", "cat": "Objet-divers", "titre": "[DOCUMENTATION] lot 400", "det": "Fiche artiste Millon, description non affichée", "src": "Millon", "typ": "Maison de vente", "pays": "FR", "date": "2025-10-30", "est": "", "prix": "230 €", "statut": "Vendu", "url": "https://www.millon.com/createurs/hippolyte-bellange", "nouveau": false}, {"id": "B0052", "vu": "2026-08-25", "cat": "Objet-divers", "titre": "Lot « à venir » signalé par MutualArt (1 upcoming)", "det": "Détail verrouillé — à identifier", "src": "MutualArt", "typ": "Agrégateur", "pays": "", "date": "", "est": "", "prix": "", "statut": "À venir", "url": "https://www.mutualart.com/Artist/Hippolyte-Bellange/CB676CE910C75B49/artworks-for-sale?Type=Upcoming", "nouveau": false}, {"id": "B0053", "vu": "2026-08-25", "cat": "Peinture", "titre": "L'Empereur Napoléon Ier à Wagram, juillet 1809", "det": "HST 57 × 72,5 cm, signée/datée 1841, Salon 1842 n°75 (réf. cote)", "src": "Osenat — L'Empire à Fontainebleau, lot 212", "typ": "Maison de vente", "pays": "FR", "date": "2015-04-12", "est": "10 000 – 12 000 €", "prix": "12 500 €", "statut": "Vendu", "url": "https://www.osenat.com/lot/21937/4938999-joseph-louis-hippolyte-bellange-paris-1800-1866-lempereur", "nouveau": false}, {"id": "B0054", "vu": "2026-08-25", "cat": "Peinture", "titre": "The Surrender of Aboukir Fort", "det": "Huile sur panneau 162 × 212 cm (réf. cote)", "src": "Artcurial via MutualArt", "typ": "Maison de vente", "pays": "FR", "date": "2015-11-13", "est": "", "prix": "57 763 $", "statut": "Vendu", "url": "https://www.mutualart.com/Artwork/THE-SURRENDER-OF-ABOUKIR-FORT/439583F983A5E893", "nouveau": false}, {"id": "B0055", "vu": "2026-08-25", "cat": "Peinture", "titre": "Scène de bataille panoramique (Moskowa)", "det": "HST 65 × 98 cm, signée (réf. cote)", "src": "Aguttes — vente Empire bicentenaire, lot 30", "typ": "Maison de vente", "pays": "FR", "date": "2021-06", "est": "", "prix": "6 500 € TTC", "statut": "Vendu", "url": "https://www.aguttes.com/en/lot/112344/15053759-hippolyte-bellange-paris-18001", "nouveau": false}, {"id": "B0056", "vu": "2026-08-25", "cat": "Peinture", "titre": "Grenadiers à pied de la Garde en faction près d'un moulin, paysage de neige", "det": "Huile sur panneau 1854, 31 × 24 cm, coll. Bernard Franck (réf. cote)", "src": "Thierry de Maigret — Souvenirs historiques, lot 131", "typ": "Maison de vente", "pays": "FR", "date": "", "est": "800 – 1 500 €", "prix": "2 300 €", "statut": "Vendu", "url": "https://www.thierrydemaigret.com/en/lot/22008/4766805", "nouveau": false}, {"id": "B0057", "vu": "2026-08-25", "cat": "Peinture", "titre": "Convoi militaire", "det": "HST (réf. cote)", "src": "Vanderkindere via Invaluable", "typ": "Maison de vente", "pays": "BE", "date": "2024-11-13", "est": "2 000 – 2 500 €", "prix": "Non lu", "statut": "Inconnu", "url": "https://www.invaluable.com/auction-lot/bellange-hippolyte-1800-1866-tableaux-huile-sur-t-388-c-cff495fbf5", "nouveau": false}, {"id": "B0058", "vu": "2026-08-25", "cat": "Peinture", "titre": "Réquisition de vivres au pied d'un moulin (1851)", "det": "HST 32,5 × 41 cm (réf. cote)", "src": "Briscadieu (Bordeaux)", "typ": "Maison de vente", "pays": "FR", "date": "2021-06-05", "est": "", "prix": "1 100 €", "statut": "Vendu", "url": "https://www.briscadieu-bordeaux.com//en/lot/113985/15097257", "nouveau": false}, {"id": "B0059", "vu": "2026-08-25", "cat": "Dessin", "titre": "La Retraite de Constantine (1845), annoté par le général Changarnier", "det": "Dessin, coll. napoléonienne du Palais de Monaco, lot 39 (réf. cote)", "src": "Osenat / Giquello", "typ": "Maison de vente", "pays": "FR", "date": "2024-11", "est": "800 – 1 200 €", "prix": "4 000 €", "statut": "Vendu", "url": "https://www.giquelloetassocies.fr/lot/21004/4364429-hyppolite-bellange-1800-1866-la-retraite-de-constantine", "nouveau": false}, {"id": "B0060", "vu": "2026-08-25", "cat": "Dessin", "titre": "Le Soldat de l'An II (1853)", "det": "Dessin aquarellé, coll. Palais de Monaco, lot 29 (réf. cote)", "src": "Osenat", "typ": "Maison de vente", "pays": "FR", "date": "2024-11", "est": "300 – 500 €", "prix": "700 €", "statut": "Vendu", "url": "https://www.osenat.com/lot/21004/4364419-hyppolite-bellange-18001866le", "nouveau": false}, {"id": "B0061", "vu": "2026-08-25", "cat": "Aquarelle-gouache", "titre": "Grenadier à pied de la Garde impériale (1859)", "det": "Dessin aquarellé 40 × 29 cm (réf. cote)", "src": "Osenat", "typ": "Maison de vente", "pays": "FR", "date": "2024-11-19", "est": "", "prix": "688 € TTC", "statut": "Vendu", "url": "https://www.osenat.com//en/lot/78093/6514370", "nouveau": false}, {"id": "B0062", "vu": "2026-08-25", "cat": "Livre illustré", "titre": "Uniformes de l'armée française depuis 1815 (108 lithos coloriées) + 5 lithos", "det": "(réf. cote)", "src": "Ader, lot 69", "typ": "Maison de vente", "pays": "FR", "date": "2023-05-30", "est": "", "prix": "750 €", "statut": "Vendu", "url": "https://www.ader-paris.fr/lot/136271/21652865-bellange-hippolyte-uniformes-de-larmee-francaise-depuis-1815", "nouveau": false}, {"id": "B0063", "vu": "2026-08-25", "cat": "Publication", "titre": "Solène Sazio, « Hippolyte Bellangé (1800-1866), imagier de la légende napoléonienne »", "det": "Article, Napoleonica. La Revue 2024/3 n°50, p. 159 sq. — issu de la thèse (Rouen 2018)", "src": "Cairn — Napoleonica", "typ": "Publication", "pays": "FR", "date": "2024", "est": "", "prix": "", "statut": "Publié", "url": "https://shs.cairn.info/revue-napoleonica-la-revue-2024-3-page-159?lang=fr", "nouveau": false}, {"id": "B0064", "vu": "2026-08-25", "cat": "Publication", "titre": "Dépôt HAL de l'article Sazio (hal-04995757)", "det": "Version auteur en libre accès", "src": "HAL", "typ": "Publication", "pays": "FR", "date": "2025", "est": "", "prix": "", "statut": "Publié", "url": "https://hal.science/hal-04995757v1", "nouveau": false}, {"id": "B0065", "vu": "2026-08-25", "cat": "Publication", "titre": "CV HAL de Solène Sazio — auteure de référence", "det": "13 documents ; communication 2026 « Dessiner l'expédition du Mexique (1861-1867) »", "src": "HAL", "typ": "Publication", "pays": "FR", "date": "2026", "est": "", "prix": "", "statut": "Publié", "url": "https://cv.hal.science/solene-sazio", "nouveau": false}, {"id": "B0066", "vu": "2026-08-25", "cat": "Publication", "titre": "Claudia Bonnafoux, « Le mal du pays », Album patriotique (1833) pl. 10", "det": "Notice iconographique, Fondation Napoléon, février 2024", "src": "napoleon.org", "typ": "Publication", "pays": "FR", "date": "2024-02", "est": "", "prix": "", "statut": "Publié", "url": "https://www.napoleon.org/histoire-des-2-empires/iconographie/le-mal-du-pays-album-lithographique-par-hippolyte-bellange/", "nouveau": false}, {"id": "B0067", "vu": "2026-08-25", "cat": "Publication", "titre": "Notice d'autorité Musée d'Orsay n°37312 (mise à jour 7 avril 2026)", "det": "Bellangé daguerréotypiste amateur ; renvoi au portrait PHO 1995 6 246", "src": "Musée d'Orsay", "typ": "Publication", "pays": "FR", "date": "2026-04-07", "est": "", "prix": "", "statut": "Publié", "url": "https://www.musee-orsay.fr/en/ressources/artists-personalities-catalog/hippolyte-bellange-37312", "nouveau": false}, {"id": "B0068", "vu": "2026-08-25", "cat": "Publication", "titre": "Notice Louvre RF 60 — Un jour de revue sous l'Empire (1810), 1862", "det": "Historique complet ; prêté à l'expo « Victoire ! » (Musée de l'Armée 2023-24)", "src": "Louvre collections", "typ": "Publication", "pays": "FR", "date": "", "est": "", "prix": "", "statut": "Publié", "url": "https://collections.louvre.fr/en/ark:/53355/cl010065827", "nouveau": false}, {"id": "B0069", "vu": "2026-08-25", "cat": "Publication", "titre": "Exposition « Victoire ! La fabrique des héros » (catalogue Leluc et al.)", "det": "Musée de l'Armée, 11 oct. 2023 – 28 janv. 2024 — prêt du Louvre RF 60", "src": "Musée de l'Armée", "typ": "Publication", "pays": "FR", "date": "2023-10-11", "est": "", "prix": "", "statut": "Publié", "url": "https://www.musee-armee.fr/au-programme/expositions/expositions-passees.html", "nouveau": false}, {"id": "B0070", "vu": "2026-08-25", "cat": "Publication", "titre": "La Tribune de l'Art — « Hippolyte Bellangé (1800-1866) » (id 4582)", "det": "Contenu et date non vérifiés (site inaccessible aux robots) — à ouvrir manuellement", "src": "La Tribune de l'Art", "typ": "Publication", "pays": "FR", "date": "", "est": "", "prix": "", "statut": "À vérifier", "url": "https://www.latribunedelart.com/hippolyte-bellange-1800-1866", "nouveau": false}, {"id": "B0071", "vu": "2026-08-25", "cat": "Publication", "titre": "Solène Sazio, thèse « Hippolyte Bellangé (1800-1866), reconnaissance et oubli d'un artiste aux origines de la légende napoléonienne »", "det": "Université de Rouen Normandie, soutenue 23 mars 2018, dir. Marec / Le Men (socle)", "src": "theses.fr", "typ": "Publication", "pays": "FR", "date": "2018-03-23", "est": "", "prix": "", "statut": "Publié", "url": "https://theses.fr/2018NORMR021", "nouveau": false}, {"id": "B0072", "vu": "2026-08-25", "cat": "Publication", "titre": "Francis Wey, « Exposition des œuvres d'Hippolyte Bellangé… étude biographique » (1867)", "det": "Première monographie (socle), Gallica", "src": "Gallica", "typ": "Publication", "pays": "FR", "date": "1867", "est": "", "prix": "", "statut": "Publié", "url": "https://gallica.bnf.fr/ark:/12148/bpt6k6555744x", "nouveau": false}];
+const JOURNAL = [{"date": "2026-08-25", "type": "État des lieux initial", "ajout": 72, "brief": "Brief n°0", "note": "Balayage complet — 4 explorateurs, ~500 requêtes. Sources bloquées aux robots : Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe, Cairn, HAL, Gazette Drouot, Tribune de l'Art."}];
+const ALERTES = [["Interencheres", "Alerte mot-clé « Bellangé »", "indispensable"], ["Drouot.com", "Alerte « Bellangé »", "indispensable"], ["eBay.fr", "Recherche sauvegardée « Bellangé » + alerte", "indispensable"], ["Leboncoin", "Alerte « bellangé »", "utile"], ["Catawiki", "Alerte « Bellangé »", "utile"], ["Delcampe", "Alerte « Bellangé »", "utile"], ["Invaluable", "Alerte mot-clé « Bellangé »", "utile"], ["Proantic", "Alerte « Bellangé »", "utile"], ["Google Alerts", "« Hippolyte Bellangé » (hebdo)", "utile"], ["Google Scholar", "Alerte « Hippolyte Bellangé »", "utile"], ["Gazette Drouot", "Newsletter", "optionnel"], ["MutualArt", "Suivre l'artiste (gratuit)", "optionnel"]];
+
+const CATS = {
+  "Peinture":"--cat-peinture","Aquarelle-gouache":"--cat-aquarelle","Dessin":"--cat-dessin",
+  "Lithographie-estampe":"--cat-litho","Livre illustré":"--cat-livre","Publication":"--cat-publi","Objet-divers":"--cat-divers"
+};
+const CAT_LABEL = {"Peinture":"Peintures","Aquarelle-gouache":"Aquarelles & gouaches","Dessin":"Dessins","Lithographie-estampe":"Lithographies & estampes","Livre illustré":"Livres illustrés","Publication":"Publications","Objet-divers":"Divers"};
+
+function groupOf(r){
+  if(r.cat==="Publication") return "publi";
+  if(r.statut==="À venir") return "venir";
+  if(r.statut==="En vente") return "vente";
+  if(/réf\. cote/.test(r.det)) return "cote";
+  return "resultat";
+}
+const GROUPS = [
+  ["venir","Ventes à venir","enchères annoncées"],
+  ["vente","En vente actuellement","marchands, galeries, marketplaces"],
+  ["resultat","Passé en vente depuis 2025","résultats et invendus"],
+  ["publi","Publications & actualités","articles, notices, expositions"],
+  ["cote","Références de cote","résultats antérieurs marquants"]
+];
+function pillClass(s){
+  if(s==="À venir") return "venir";
+  if(s==="En vente") return "vente";
+  if(s==="Vendu") return "vendu";
+  if(s==="Publié") return "publie";
+  return "";
+}
+function host(u){try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return ""}}
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+let state = {group:null, cats:new Set(), q:""};
+
+function renderKpis(){
+  const counts = {};
+  DATA.forEach(r=>{const g=groupOf(r);counts[g]=(counts[g]||0)+1});
+  const nouveaux = DATA.filter(r=>r.nouveau).length;
+  const k = document.getElementById("kpis");
+  k.innerHTML = "";
+  const tiles = [
+    ["nouveau","Nouveautés","depuis le dernier passage",nouveaux],
+    ["venir","À venir","enchères annoncées",counts.venir||0],
+    ["vente","En vente","chez les marchands",counts.vente||0],
+    ["resultat","Passés en vente","depuis janvier 2025",counts.resultat||0],
+    ["publi","Publications","2024–2026 + socle",counts.publi||0],
+  ];
+  tiles.forEach(([g,l,h,n])=>{
+    const b=document.createElement("button");
+    b.className="kpi"+(state.group===g?" active":"");
+    b.innerHTML=`<div class="n">${n}</div><div class="l">${l}</div><div class="h">${h}</div>`;
+    b.onclick=()=>{state.group = state.group===g?null:g; render()};
+    k.appendChild(b);
+  });
+}
+function renderChips(){
+  const c=document.getElementById("catChips"); c.innerHTML="";
+  Object.keys(CATS).forEach(cat=>{
+    const b=document.createElement("button");
+    b.className="chip"+(state.cats.has(cat)?" on":"");
+    b.style.setProperty("--c",`var(${CATS[cat]})`);
+    b.innerHTML=`<span class="dot"></span>${CAT_LABEL[cat]}`;
+    b.onclick=()=>{state.cats.has(cat)?state.cats.delete(cat):state.cats.add(cat);render()};
+    c.appendChild(b);
+  });
+}
+function matches(r){
+  if(state.group==="nouveau" && !r.nouveau) return false;
+  if(state.group && state.group!=="nouveau" && groupOf(r)!==state.group) return false;
+  if(state.cats.size && !state.cats.has(r.cat)) return false;
+  if(state.q){
+    const hay=(r.titre+" "+r.det+" "+r.src+" "+r.cat+" "+r.statut).toLowerCase();
+    if(!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+function itemHtml(r){
+  const c=`var(${CATS[r.cat]||"--cat-divers"})`;
+  const price = r.prix && !/^(Non|Paywall|Sans)/.test(r.prix) ? r.prix : (r.prix||"");
+  return `<article class="item" style="--c:${c}">
+    <div class="stripe"></div>
+    <div class="main">
+      <div class="t">${r.nouveau?'<span class="new">Nouveau</span>':''}<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.titre)}</a></div>
+      ${r.det?`<div class="d">${esc(r.det)}</div>`:""}
+      <div class="m"><span class="cat">${esc(r.cat)}</span><span>${esc(r.src)}</span>${r.pays?`<span>${esc(r.pays)}</span>`:""}${r.date?`<span>${esc(r.date)}</span>`:""}<span>${esc(host(r.url))}</span></div>
+    </div>
+    <div class="side">
+      <span class="pill ${pillClass(r.statut)}">${esc(r.statut)}</span>
+      ${price?`<span class="price">${esc(price)}</span>`:""}
+      ${r.est?`<span class="est">est. ${esc(r.est)}</span>`:""}
+    </div>
+  </article>`;
+}
+function renderList(){
+  const list=document.getElementById("list"); list.innerHTML="";
+  const rows=DATA.filter(matches);
+  document.getElementById("count").textContent = rows.length+" entrée"+(rows.length>1?"s":"")+" affichée"+(rows.length>1?"s":"")+" sur "+DATA.length;
+  GROUPS.forEach(([g,title,sub])=>{
+    const rs=rows.filter(r=>groupOf(r)===g);
+    if(!rs.length) return;
+    const order={"Peinture":0,"Aquarelle-gouache":1,"Dessin":2,"Lithographie-estampe":3,"Livre illustré":4,"Objet-divers":5,"Publication":6};
+    rs.sort((a,b)=>(b.nouveau-a.nouveau)||(order[a.cat]-order[b.cat])||(b.date||"").localeCompare(a.date||""));
+    const sec=document.createElement("section"); sec.className="group";
+    sec.innerHTML=`<h2>${title}<small>${sub} · ${rs.length}</small></h2>`+rs.map(itemHtml).join("");
+    list.appendChild(sec);
+  });
+  if(!rows.length) list.innerHTML='<p class="count">Rien ne correspond à ce filtre.</p>';
+}
+function renderSide(){
+  document.getElementById("alertes").innerHTML = ALERTES.map(([p,w,lvl])=>`<div class="alert"><div><b>${esc(p)}</b><span>${esc(w)}</span></div><span class="tag ${lvl==="indispensable"?"ind":lvl==="utile"?"uti":"opt"}">${lvl}</span></div>`).join("");
+  document.getElementById("journal").innerHTML = JOURNAL.slice().reverse().map(j=>`<div class="jrow"><b>${esc(j.date)}</b> · ${esc(j.type)} · ${j.ajout} entrée${j.ajout>1?"s":""} · ${esc(j.brief)}<span>${esc(j.note)}</span></div>`).join("");
+  const last=JOURNAL[JOURNAL.length-1];
+  document.getElementById("lastRun").textContent = last.date.split("-").reverse().join("/");
+  document.getElementById("entries").textContent = DATA.length+" entrées au registre";
+}
+function render(){renderKpis();renderChips();renderList()}
+document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value.trim().toLowerCase();renderList()});
+renderSide(); render();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+Famille,Source,URL de surveillance,Accès robot,Alerte e-mail à créer,Notes
+Maisons de vente FR,Osenat (Fontainebleau) — ventes Empire,https://www.osenat.com,OK (fiches de lots),Oui — newsletter/alerte « Bellangé »,Source n°1 pour les peintures ; catalogue paginé partiellement lisible
+Maisons de vente FR,Millon — fiche artiste,https://www.millon.com/createurs/hippolyte-bellange,OK,Oui,Résultats sans URL de lot
+Maisons de vente FR,"Ader, Aguttes, Tajan, Thierry de Maigret, Coutau-Bégarie, Rossini, De Baecque, Libert, Émeraude, Giquello, Rouillac…",recherche « Bellangé » sur chaque site,OK,Oui quand disponible,Fiches lisibles
+Plateformes FR,Interencheres,https://www.interencheres.com/recherche?q=Bellangé,BLOQUÉ (404/410),OUI — alerte mot-clé « Bellangé » (indispensable),"Couvre les maisons régionales (Bayeux, Évreux, Tours, Joué…)"
+Plateformes FR,Drouot.com,https://drouot.com/fr/recherche?q=Bellangé,BLOQUÉ,OUI — alerte « Bellangé »,
+Plateformes FR,Gazette Drouot,https://www.gazette-drouot.com/recherche?q=Bellangé,BLOQUÉ,Newsletter,Ventes à venir + résultats commentés
+Agrégateurs,Invaluable — page artiste,https://www.invaluable.com/artist/bellange-hippolyte-5d8abb2azf/sold-at-auction-prices/,OK (liste),OUI — alerte mot-clé,La plus complète à l'international ; pages de lot vides (JS)
+Agrégateurs,OneBid — page artiste,https://onebid.fr/fr/artist/aukcja/Hippolyte-Bellange,OK (prix + statut),Oui,Marché polonais des lithos
+Agrégateurs,Artnet — résultats,https://www.artnet.com/artists/hippolyte-bellang%C3%A9/auction-results,OK (index) / prix paywall,Non,Utile pour repérer les passages (ex. Barbier du pays de Caux)
+Agrégateurs,the-saleroom — price guide,https://www.the-saleroom.com/en-gb/price-guide/hippolyte-bellangé,OK (liste),Oui (alerte lot),
+Agrégateurs,MutualArt,https://www.mutualart.com/Artist/Hippolyte-Bellange/CB676CE910C75B49,Compteurs seulement,"Oui (gratuit, « follow artist »)",Signale les lots à venir
+Agrégateurs,LiveAuctioneers — price guide,https://www.liveauctioneers.com/price-guide/hippolyte-bellange/10477/,OK,Oui (keyword alert),Fichter Kunsthandel (DE) y vend régulièrement
+Agrégateurs,"LotSearch, Barnebys, Artprice",,BLOQUÉ / paywall,Barnebys : alerte gratuite,
+Marketplaces,eBay.fr / eBay.com,recherche « Bellangé » dans Art > Estampes / Dessins,BLOQUÉ (recherche) ; fiches /itm/ lisibles,OUI — recherche sauvegardée « Bellangé » avec alerte,Beaucoup d'annonces expirées indexées
+Marketplaces,Catawiki,https://www.catawiki.com/fr/s?q=Bellangé,BLOQUÉ,OUI — alerte « Bellangé »,
+Marketplaces,Delcampe,https://www.delcampe.net/fr/collections/search?term=Bellangé,BLOQUÉ,OUI — alerte « Bellangé »,Cartes/lithos/livres
+Marketplaces,Leboncoin,https://www.leboncoin.fr/recherche?text=bellangé,BLOQUÉ,OUI — alerte « bellangé »,Attention homonymes (ébénistes Bellangé)
+Marketplaces,"1stDibs, Pamono, Selency",recherche « Bellangé »,OK (fiches ; prix 1stDibs à la connexion),1stDibs : « follow » possible,
+Marchands,Proantic,https://www.proantic.com/recherche?q=Bellangé,Recherche bloquée ; fiches lisibles,OUI — alerte « Bellangé »,Galerie Mazarini y est active
+Marchands,"Anticstore, Les Atamanes, Galerie Napoléon, Estampes MAS, Galerie Dantan, Le Serbon, La Nouvelle Athènes, Nahum",sites propres,Variable (Galerie Napoléon 403),Newsletters,"Galerie Napoléon = probablement le plus gros stock d'estampes, à consulter à la main"
+Livres,"Livre-rare-book, AbeBooks, viaLibri, Galaxidion",recherche auteur « Bellangé »,Fiches lisibles ; recherche LRB bloquée,AbeBooks : alerte « Bellangé » ; viaLibri : « want »,"Norvins, Uniformes 1844, Adeline 1880, Wey 1867"
+Publications,Cairn / Napoleonica,https://shs.cairn.info/resultats_recherche.php?searchTerm=Bellangé,BLOQUÉ,Non,À ouvrir à la main ou via Gmail (Google Scholar)
+Publications,HAL / theses.fr / DUMAS / Persée / OpenEdition,voir URL dans la skill,HAL bloqué ; autres OK,Google Scholar : alerte « Hippolyte Bellangé »,Suivre Solène Sazio
+Publications,Google Alerts,https://www.google.com/alerts,—,OUI — « Hippolyte Bellangé » (hebdo),"Filtrer homonymes : Jacques Bellange, ébénistes Bellangé, Eugène Bellangé"
+Publications,"POP/Joconde, Gallica, Louvre, Orsay, Wikidata (historique)",voir URL dans la skill,OK,Non,"Nouvelles notices, acquisitions, prêts"
+Publications,"Musées : MBA Rouen, Musée de l'Armée, Malmaison, Versailles, Fondation Napoléon",pages expositions,OK,Newsletters,
+Presse,"La Tribune de l'Art, Journal des Arts, Connaissance des Arts, Souvenir Napoléonien",recherche « Bellangé »,Tribune de l'Art bloqué,Newsletters,
