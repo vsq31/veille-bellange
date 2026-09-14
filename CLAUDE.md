@@ -43,3 +43,5 @@ python3 scripts/build_dashboard.py   # dashboard/index.html + dashboard/artifact
 ## Commits
 
 Messages en français, un commit par passage hebdo : `Passage hebdo AAAA-MM-JJ — N nouveautés`. Mettre à jour `data/*.csv`, `dashboard/`, `docs/briefs/`. Push sur `main` ; si `git push` renvoie 403 (app GitHub non liée à la session), passer par l'outil GitHub MCP `push_files` (un appel = un commit). `data/registre.xlsx` n'est pas versionné (binaire) : il se régénère avec `scripts/build_registre.py`.
+
+**Autorisation permanente (Jérôme, 14/09/2026) : le passage hebdo pousse directement sur `main`, sans demander.** Cela vaut aussi quand la session tourne sur une branche assignée `claude/…` : après le commit, faire `git push origin HEAD:main` (fast-forward ; ne jamais forcer). Seul le push sur `main` redéploie la page publique GitHub Pages — un push sur une branche `claude/…` ne suffit pas et laisse la page publique en retard. Ne pas ouvrir de pull request pour un passage hebdo.
