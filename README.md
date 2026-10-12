@@ -46,7 +46,7 @@ La version « vivante » du registre est un Google Sheet (dossier Drive « Veill
 Chaque lundi à 7h, une tâche planifiée Claude exécute la skill `veille-bellange` :
 
 1. lit le registre sur Drive et construit l'ensemble des URL connues ;
-2. lit Gmail — les alertes des plateformes qui refusent les robots (Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe…) ;
+2. ~~lit Gmail (alertes)~~ — abandonné le 12/10/2026, veille classique uniquement ;
 3. balaie le web avec quatre explorateurs en parallèle (maisons de vente FR ; agrégateurs internationaux ; marchands, marketplaces, libraires ; publications) ;
 4. déduplique et vérifie chaque nouveauté en ouvrant la page ;
 5. réécrit le registre et le journal ;

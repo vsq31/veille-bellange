@@ -5,7 +5,7 @@ Objet : `Veille Bellangé — semaine du JJ/MM : N nouveautés` (ou `: rien de n
 Ton : sobre, factuel, tutoiement. Pas d'emoji. Chaque item = une ligne avec lien. Prix tels qu'affichés. Le mail doit se lire en 60 secondes ; la page a le détail.
 
 ```html
-<p>Salut Jérôme — passage du JJ/MM/AAAA. <b>N nouveautés</b> depuis le DD/MM, M sources balayées, K alertes Gmail lues.</p>
+<p>Salut Jérôme — passage du JJ/MM/AAAA. <b>N nouveautés</b> depuis le DD/MM, M sources balayées.</p>
 
 <!-- Bloc « à ne pas rater » : seulement s'il y a une pièce majeure ou une échéance < 10 jours -->
 <p style="border-left:3px solid #A4322E;padding-left:10px"><b>À ne pas rater</b><br>
@@ -34,8 +34,8 @@ Ton : sobre, factuel, tutoiement. Pas d'emoji. Chaque item = une ligne avec lien
   <li><a href="URL">Titre</a> — auteur, support, date — une phrase</li>
 </ul>
 
-<p style="color:#666;font-size:13px">Non vérifié cette semaine : … (pages inaccessibles). Alertes attendues non reçues : … <br>
+<p style="color:#666;font-size:13px">Non vérifié cette semaine : … (pages inaccessibles). <br>
 <a href="https://claude.ai/code/artifact/2d934825-e061-4bd9-b3e8-a49f6e33fbee">Page de veille</a> · <a href="URL_REGISTRE">Registre</a></p>
 ```
 
-Section vide → la supprimer (ne pas écrire « rien »), sauf si tout est vide : alors un seul paragraphe « Rien de neuf cette semaine. M sources balayées, K alertes lues. Prochain passage le JJ/MM. »
+Section vide → la supprimer (ne pas écrire « rien »), sauf si tout est vide : alors un seul paragraphe « Rien de neuf cette semaine. M sources balayées. Prochain passage le JJ/MM. »

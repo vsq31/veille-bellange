@@ -31,7 +31,7 @@ Deux objectifs, dans cet ordre de priorité :
 | Page tableau de bord (Artifact) | `https://claude.ai/code/artifact/2d934825-e061-4bd9-b3e8-a49f6e33fbee` — republier avec `url` pour garder l'adresse |
 | Page publique (GitHub Pages) | `https://vsq31.github.io/veille-bellange/` — redéployée à chaque push sur `main` |
 | Destinataire du brief | jerome.gays@brasserie-du-venasque.com |
-| Boîte à alertes | `hippolyte.bellange@gmail.com` — boîte Gmail dédiée où sont enregistrées toutes les alertes des plateformes ; transfert automatique vers la boîte de Jérôme, où un filtre `to:hippolyte.bellange@gmail.com` pose le label « Veille Bellangé » (id `Label_12`). La veille lit la boîte de Jérôme, pas la boîte dédiée. |
+| Alertes e-mail | **Abandonnées (12/10/2026)** : veille classique uniquement (balayage web). Ne plus lire Gmail pour les alertes ; Gmail ne sert qu'à déposer le brief en brouillon. |
 
 Colonnes du registre (ne pas en changer l'ordre) : `ID, Date vue, Catégorie, Titre, Détails, Source, Type source, Pays, Date vente / publication, Estimation, Prix, Statut, URL, Intérêt (à remplir), Mes notes`.
 
@@ -49,8 +49,8 @@ Vocabulaire contrôlé :
 2. `read_file_content` du Registre → construire l'ensemble des **URL connues** (normalisées : sans `utm_*`, sans `?page=`, sans slash final, hostname en minuscules) et des **clés secondaires** `titre|source|date` pour attraper un même lot repris sur une autre URL (ex. lot Osenat relayé par Invaluable et Artnet : on garde une ligne par plateforme mais on signale « déjà connu via … »).
 3. Noter le dernier ID et la date du dernier passage (Journal).
 
-### 2. Lire Gmail (alertes des plateformes)
-Les alertes sont enregistrées sur les plateformes avec l'adresse dédiée `hippolyte.bellange@gmail.com`, transférée automatiquement dans la boîte de Jérôme (label « Veille Bellangé », les messages peuvent sauter la boîte de réception). `search_threads` sur la période depuis le dernier passage, trois requêtes complémentaires : `to:hippolyte.bellange@gmail.com newer_than:8d` (la principale), `label:"Veille Bellangé" newer_than:8d`, et `(Bellangé OR Bellange) newer_than:8d` en filet. Si la première requête ne renvoie rien depuis trois passages, vérifier dans le brief que le transfert automatique fonctionne toujours. Sources attendues : Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe, Invaluable, Proantic, Google Alerts, Google Scholar, newsletters Gazette Drouot / Osenat / galeries. Extraire chaque lot ou article mentionné (titre, URL, date de vente, estimation). Ignorer les homonymes (voir § Bruit). Ces alertes couvrent précisément les sites que les robots ne peuvent pas ouvrir : c'est la source la plus importante pour Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe.
+### 2. (supprimée) Lecture des alertes Gmail
+Abandonnée par décision de Jérôme (12/10/2026) : ne pas lire Gmail, ne pas signaler de « panne de transfert ». Les sources bloquées aux robots (Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe) restent hors de portée : les noter dans le journal, sans insister ; WebSearch peut donner des pistes, à vérifier en ouvrant la page.
 
 ### 3. Balayer le web (4 explorateurs en parallèle, `Agent` general-purpose)
 Donner à chacun : l'identité de l'artiste, les orthographes (`Bellangé`, `Bellange`, `Hyppolite Bellangé`, `H. Bellangé`, `hte Bellangé`), la borne de date (depuis le dernier passage, avec 7 jours de marge), la liste d'URL connues à ne pas re-signaler, et le format de retour (une ligne par item : titre ; catégorie ; source ; pays ; date ; estimation ; prix ; statut ; URL exacte). Consigne absolue : **n'inventer aucune donnée, ne retourner que ce qui a été vu sur une page ouverte, avec son URL**. Périmètres :
@@ -73,7 +73,7 @@ Le connecteur Drive ne modifie pas le contenu d'un Sheet existant : on **réécr
 1. Reconstituer le CSV complet = anciennes lignes (avec statuts mis à jour) + nouvelles lignes (Date vue = aujourd'hui).
 2. `create_file` avec `title` = `Veille Bellangé — Registre`, `parentId` = dossier, `contentMimeType` = `text/csv`, `textContent` = CSV → nouveau Sheet.
 3. Vérifier par `read_file_content` que le nouveau fichier contient bien toutes les lignes, **puis seulement** `trash_file` sur l'ancien.
-4. Même chose pour le Journal : ajouter une ligne `date, "Passage hebdo", nb ajoutées, nb signalées, "Brief n°N", remarques (sources en panne, alertes Gmail reçues ou non)`.
+4. Même chose pour le Journal : ajouter une ligne `date, "Passage hebdo", nb ajoutées, nb signalées, "Brief n°N", remarques (sources en panne)`.
 5. Le Sheet Sources n'est réécrit que si une source change d'état (nouvelle source, blocage levé, alerte créée).
 
 ### 5 bis. Exporter vers GitHub (s'exécute en fin de passage, après les étapes 6 et 7)
@@ -103,7 +103,7 @@ Fin de session : trois phrases — nombre de nouveautés, la plus importante, ce
 - **Les lithographies ne noient pas le brief.** Dans le brief, peintures / aquarelles / dessins d'abord, une ligne chacun ; lithographies et livres ensuite, regroupés (« 6 lithos entre 25 et 300 € chez X, Y, Z — la plus intéressante : … »). Une litho rare (album complet, grand format, modèle de coloris, 1re édition, épreuve avant la lettre) est traitée comme une pièce.
 - **Les invendus comptent.** Un lot qui repasse ou reste en stock est une information de cote et une occasion de négocier.
 - **Bruit à exclure** : Jacques Bellange (graveur lorrain, 1575-1616) ; Pierre-Antoine et Louis-Alexandre Bellangé (ébénistes, meubles) ; Eugène Bellangé (fils, 1837-1895 — à signaler à part seulement si c'est une pièce notable) ; Aurélien Bellanger (romancier) ; « Bellange » nom de lieu ou de rue.
-- **Les sources bloquées ne sont pas des échecs** : les nommer dans le journal, ne pas relancer dix fois. Si une alerte Gmail attendue n'est jamais arrivée depuis trois passages, le dire dans le brief (« l'alerte Interencheres semble absente »).
+- **Les sources bloquées ne sont pas des échecs** : les nommer dans le journal, ne pas relancer dix fois.
 - **Ne jamais acheter, enchérir ou contacter un vendeur.** La veille signale ; Jérôme décide.
 
 ## Fichiers de référence
