@@ -3,7 +3,7 @@
 - **Planification** : `0 5 * * 1` (UTC) → lundi 7h heure d'été de Paris, 6h en heure d'hiver.
 - **Première exécution** : lundi 31 août 2026.
 - **Exécution** : session Claude fraîche, dans le cloud ; charge la skill `veille-bellange` si elle est enregistrée, sinon suit la procédure résumée dans le prompt (autosuffisante).
-- **Sortie** : registre et journal réécrits sur Drive, page republiée à la même adresse, brief déposé en **brouillon** Gmail (pas d'envoi automatique — choix du 25/08/2026), et un commit `Passage hebdo AAAA-MM-JJ — N nouveautés` poussé sur `main` du dépôt `vsq31/veille-bellange` (ajouté le 26/08/2026).
+- **Sortie** : `data/*.csv` réécrits, page republiée à la même adresse, **aucun e-mail ni brouillon, aucun Google Drive** (décision du 26/10/2026), et un commit `Passage hebdo AAAA-MM-JJ — N nouveautés` poussé sur `main` du dépôt `vsq31/veille-bellange` (ajouté le 26/08/2026).
 
 ## Prompt de la tâche
 

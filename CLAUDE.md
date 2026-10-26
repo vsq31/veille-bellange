@@ -10,12 +10,12 @@ Veille hebdomadaire sur **Hippolyte Bellangé** (1800-1866, peintre et lithograp
 
 | Brique | Où | Rôle |
 |---|---|---|
-| Registre, Sources, Journal | Google Drive, dossier « Veille Bellangé » (id `1PQH7v1oXn_05ZxfNAWF2BXo2JbuH9Cmm`), trois Google Sheets — retrouver par titre, l'id du Registre change à chaque réécriture | Source de vérité vivante |
+| Registre, Sources, Journal | `data/registre.csv`, `data/sources.csv`, `data/journal.csv` dans ce dépôt. **Plus de Google Drive** (décision du 26/10/2026) | Source de vérité unique |
 | Skill `veille-bellange` | `skill/veille-bellange/` (copie dans le compte Claude de Jérôme) | Procédure du passage hebdo en 8 étapes |
 | Page tableau de bord | Artifact `https://claude.ai/code/artifact/2d934825-e061-4bd9-b3e8-a49f6e33fbee` — republier avec `url` ; source dans `dashboard/` | Historique, filtres, cote |
-| Tâche planifiée « Veille Bellangé hebdo » | id `trig_01XuAgS8iRG5SkSE8kNqmMev`, cron `0 5 * * 1` UTC (lundi 7h Paris en été) | Rejoue la skill chaque semaine, brief en **brouillon** Gmail |
+| Tâche planifiée « Veille Bellangé hebdo » | id `trig_01XuAgS8iRG5SkSE8kNqmMev`, cron `0 5 * * 1` UTC (lundi 7h Paris en été) | Rejoue la skill chaque semaine, commit sur `main` et page republiée ; **ni e-mail ni brouillon** |
 
-Ce dépôt est l'**instantané versionné** : `data/*.csv` = export des Sheets, `dashboard/index.html` = page autonome (GitHub Pages possible), `scripts/` = générateurs, `docs/briefs/` = briefs successifs.
+Ce dépôt est la **mémoire et la publication** : `data/*.csv` = registre, sources, journal, `dashboard/index.html` = page autonome (GitHub Pages possible), `scripts/` = générateurs, `docs/briefs/` = archive des anciens briefs (plus alimentée).
 
 ## Conventions du registre (ne pas changer)
 
@@ -30,7 +30,7 @@ ID : `B` + 4 chiffres, séquentiel (dernier : B0072). Dédup par URL normalisée
 - Peintures / aquarelles / dessins d'abord ; lithographies et livres regroupés. Les invendus comptent.
 - Homonymes à exclure : Jacques Bellange (graveur 1575-1616), ébénistes Bellangé, Eugène Bellangé (fils), Aurélien Bellanger.
 - Sources bloquées aux robots (Interencheres, Drouot, eBay, Leboncoin, Catawiki, Delcampe, Cairn, HAL, Gazette Drouot, Tribune de l'Art) : ne pas insister, les noter dans le journal. **La veille par e-mail (alertes Gmail, boîte `hippolyte.bellange@gmail.com`) est abandonnée (12/10/2026)** : on reste sur la veille classique, balayage web uniquement ; ne plus lire Gmail pour les alertes.
-- Le brief est **déposé en brouillon** Gmail, jamais envoyé sans que Jérôme le demande.
+- **Plus de Google Drive ni de Gmail (26/10/2026)** : aucun stockage sur Drive, aucun brouillon ni e-mail de brief. Le passage hebdo lit et écrit `data/*.csv`, republie la page (Artifact + GitHub Pages) et pousse sur `main`. Ne pas utiliser les connecteurs Drive et Gmail.
 - Ne jamais acheter, enchérir, ni contacter un vendeur.
 
 ## Regénérer
@@ -42,6 +42,6 @@ python3 scripts/build_dashboard.py   # dashboard/index.html + dashboard/artifact
 
 ## Commits
 
-Messages en français, un commit par passage hebdo : `Passage hebdo AAAA-MM-JJ — N nouveautés`. Mettre à jour `data/*.csv`, `dashboard/`, `docs/briefs/`. Push sur `main` ; si `git push` renvoie 403 (app GitHub non liée à la session), passer par l'outil GitHub MCP `push_files` (un appel = un commit). `data/registre.xlsx` n'est pas versionné (binaire) : il se régénère avec `scripts/build_registre.py`.
+Messages en français, un commit par passage hebdo : `Passage hebdo AAAA-MM-JJ — N nouveautés`. Mettre à jour `data/*.csv` et `dashboard/`. Push sur `main` ; si `git push` renvoie 403 (app GitHub non liée à la session), passer par l'outil GitHub MCP `push_files` (un appel = un commit). `data/registre.xlsx` n'est pas versionné (binaire) : il se régénère avec `scripts/build_registre.py`.
 
 **Autorisation permanente (Jérôme, 14/09/2026) : le passage hebdo pousse directement sur `main`, sans demander.** Cela vaut aussi quand la session tourne sur une branche assignée `claude/…` : après le commit, faire `git push origin HEAD:main` (fast-forward ; ne jamais forcer). Seul le push sur `main` redéploie la page publique GitHub Pages — un push sur une branche `claude/…` ne suffit pas et laisse la page publique en retard. Ne pas ouvrir de pull request pour un passage hebdo.

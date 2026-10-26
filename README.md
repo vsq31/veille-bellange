@@ -7,7 +7,7 @@ Deux objectifs :
 1. **Marché** — détecter toute œuvre de Bellangé qui apparaît en ligne : enchères à venir et résultats (maisons de vente françaises et internationales, agrégateurs), stock des marchands, galeries et libraires, petites annonces et marketplaces.
 2. **Publications** — articles universitaires, livres, catalogues, expositions, acquisitions et notices de musées, presse spécialisée, thèses.
 
-Le principe : une **mémoire** (le registre) qui liste tout ce qui a déjà été vu, un **passage hebdomadaire** qui balaie les sources et les alertes e-mail, et ne signale que l'inédit, un **brief** déposé dans Gmail, et une **page** qui garde l'historique et construit la cote au fil des mois.
+Le principe : une **mémoire** (le registre) qui liste tout ce qui a déjà été vu, un **passage hebdomadaire** qui balaie les sources et les alertes e-mail, et ne signale que l'inédit, et une **page** qui garde l'historique et construit la cote au fil des mois.
 
 **Page publique : https://vsq31.github.io/veille-bellange/** — GitHub Pages, redéployée depuis `dashboard/` à chaque push sur `main`.
 
@@ -20,7 +20,6 @@ veille-bellange/
 │   ├── SKILL.md                  # modes, infrastructure, procédure en 8 étapes, règles
 │   └── references/
 │       ├── sources.md            # sources par famille, URL de surveillance, accès robot, alertes
-│       ├── brief_template.md     # gabarit du mail hebdo
 │       └── dashboard_template.html
 ├── data/
 │   ├── registre.csv              # le registre (une ligne par lot / annonce / publication)
@@ -39,21 +38,20 @@ veille-bellange/
     └── briefs/                   # les briefs successifs
 ```
 
-La version « vivante » du registre est un Google Sheet (dossier Drive « Veille Bellangé ») : c'est lui que le passage hebdo lit et réécrit. Ce dépôt en conserve un instantané versionné à chaque passage.
+Le registre vivant est `data/registre.csv` dans ce dépôt : c'est lui que le passage hebdo lit et réécrit, sans Google Drive ni e-mail.
 
 ## Comment ça tourne
 
 Chaque lundi à 7h, une tâche planifiée Claude exécute la skill `veille-bellange` :
 
-1. lit le registre sur Drive et construit l'ensemble des URL connues ;
+1. lit `data/registre.csv` et construit l'ensemble des URL connues ;
 2. ~~lit Gmail (alertes)~~ — abandonné le 12/10/2026, veille classique uniquement ;
 3. balaie le web avec quatre explorateurs en parallèle (maisons de vente FR ; agrégateurs internationaux ; marchands, marketplaces, libraires ; publications) ;
 4. déduplique et vérifie chaque nouveauté en ouvrant la page ;
-5. réécrit le registre et le journal ;
+5. réécrit `data/registre.csv` et `data/journal.csv` ;
 6. met à jour la page ;
-7. dépose le brief en brouillon Gmail ;
-8. exporte l'instantané vers ce dépôt (CSV, page, brief du jour — commit `Passage hebdo AAAA-MM-JJ — N nouveautés` sur `main`) ;
-9. rend compte en trois phrases.
+7. commit `Passage hebdo AAAA-MM-JJ — N nouveautés` poussé sur `main` (redéploie la page publique) ;
+8. rend compte en trois phrases.
 
 Règle de fond : **rien d'inventé** — chaque ligne du registre vient d'une page ouverte, avec son URL.
 
